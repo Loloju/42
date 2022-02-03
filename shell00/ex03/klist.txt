@@ -1,0 +1,5 @@
+Credentials cache: API:C3F0EA7B-B930-4E7E-A2B6-603F2DCA13F7
+        Principal: odemirel@42KOCAELI.COM.TR
+
+  Issued                Expires               Principal
+Nov 27 20:07:22 2021  Nov 28 06:07:16 2021  krbtgt/42KOCAELI.COM.TR@42KOCAELI.COM.TR
