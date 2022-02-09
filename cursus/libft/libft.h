@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayalman <ayalman@student.42.fr>            +#+  +:+       +#+        */
+/*   By: odemirel <odemirel@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/31 14:05:52 by ayalman           #+#    #+#             */
-/*   Updated: 2022/02/03 00:19:22 by ayalman          ###   ########.fr       */
+/*   Created: 2022/02/09 21:33:35 by odemirel          #+#    #+#             */
+/*   Updated: 2022/02/09 21:34:28 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char	*ft_strdup(const char *str);
 char	*ft_strnstr(const char *bigy, const char *mini, size_t n);
 char	*ft_strrchr(const char *s, int c);
 char	*ft_strchr(const char *s, int c);
-//2.Part
+
 void	ft_putchar_fd(char a, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
@@ -63,7 +63,7 @@ char	**ft_split(char const *s, char c);
 char	*ft_itoa(int n);
 
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
-//3.Bonus
+
 t_list	*ft_lstnew(void *content);
 void	ft_lstadd_front(t_list **lst, t_list *new);
 int		ft_lstsize(t_list *lst);

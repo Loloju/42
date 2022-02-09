@@ -3,72 +3,54 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayalman <ayalman@student.42.fr>            +#+  +:+       +#+        */
+/*   By: odemirel <odemirel@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/31 21:36:44 by ayalman           #+#    #+#             */
-/*   Updated: 2022/02/03 01:58:53 by ayalman          ###   ########.Tr       */
+/*   Created: 2022/02/09 20:43:35 by odemirel          #+#    #+#             */
+/*   Updated: 2022/02/09 20:48:19 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stdio.h>
 
-static int	ft_pic(long n)
+int	get_length(int nbr)
 {
-	size_t	estim;
-
-	estim = 0;
-	if (n < 0)
-	{
-		estim++;
-		n = -n;
-	}
-	while (n >= 1)
-	{
-		estim++;
-		n /= 10;
-	}
-	return (estim);
+	if (nbr >= 0 && nbr <= 9)
+		return (1);
+	else
+		return (1 + get_length(nbr / 10));
 }
 
-static char	*ft_oc(char *rtn, long nbr, int len, int neg)
+void	write_nbr(char *str, int nbr, int lnt)
 {
-	if (nbr != 0)
-		rtn = malloc(sizeof(char) * (len + 1));
-	else
-		return (rtn = ft_strdup("0"));
-	if (!rtn)
-		return (0);
-	if (nbr < 0)
+	if (!(nbr >= 0 && nbr <= 9))
 	{
-		neg++;
-		nbr = -nbr;
+		write_nbr(str, nbr / 10, lnt - 1);
 	}
-	rtn[len] = '\0';
-	while (--len)
-	{
-		rtn[len] = (nbr % 10) + '0';
-		nbr /= 10;
-	}
-	if (neg == 1)
-		rtn[0] = '-';
-	else
-		rtn[0] = (nbr % 10) + '0';
-	return (rtn);
+	str[lnt] = (nbr % 10) + '0';
 }
 
 char	*ft_itoa(int n)
 {
-	int		len;
-	char	*rtn;
-	long	nbr;
-	int		neg;
+	char	*result;
+	int		i;
+	int		length;
+	int		isnegative;
 
-	nbr = n;
-	len = ft_pic(nbr);
-	rtn = 0;
-	neg = 0;
-	rtn = ft_oc(rtn, nbr, len, neg);
-	if (!rtn)
-		return (0);
-	return (rtn);
+	i = 0;
+	length = 0;
+	isnegative = 0;
+	if (n < 0)
+	{
+		n *= -1;
+		isnegative = 1;
+	}
+	length = get_length (n);
+	if (isnegative)
+		length++;	
+	result = malloc(sizeof(char) * length + 1);
+	if (isnegative)
+		*result = '-';
+	write_nbr (result, n, length - 1);
+	result[length + 1] = '\0';
+	return (result);
 }

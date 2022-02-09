@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ayalman <ayalman@student.42.fr>            +#+  +:+       +#+         #
+#    By: odemirel <odemirel@student.42kocaeli.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/01/31 22:49:43 by ayalman           #+#    #+#              #
-#    Updated: 2022/02/03 18:28:40 by ayalman          ###   ########.Tr        #
+#    Created: 2022/02/09 21:33:47 by odemirel          #+#    #+#              #
+#    Updated: 2022/02/09 21:33:50 by odemirel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 

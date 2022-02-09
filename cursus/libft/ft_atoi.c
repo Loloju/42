@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayalman <ayalman@student.42kocaeli.>       +#+  +:+       +#+        */
+/*   By: odemirel <odemirel@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/31 15:06:28 by ayalman           #+#    #+#             */
-/*   Updated: 2022/02/09 15:50:26 by odemirel         ###   ########.fr       */
+/*   Created: 2022/02/09 20:35:08 by odemirel          #+#    #+#             */
+/*   Updated: 2022/02/09 20:35:28 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
-#include "limits.h"
 
 static int	ft_isspace(char chr)
 {
