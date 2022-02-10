@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: odemirel <odemirel@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: odemirel <odemirel@student.42kocaeli.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 20:43:35 by odemirel          #+#    #+#             */
-/*   Updated: 2022/02/09 20:48:19 by odemirel         ###   ########.fr       */
+/*   Updated: 2022/02/10 11:24:35 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "libft.h"
 
-int	get_length(int nbr)
+int	get_length(long nbr)
 {
 	if (nbr >= 0 && nbr <= 9)
 		return (1);
@@ -20,7 +20,7 @@ int	get_length(int nbr)
 		return (1 + get_length(nbr / 10));
 }
 
-void	write_nbr(char *str, int nbr, int lnt)
+void	write_nbr(char *str, long nbr, int lnt)
 {
 	if (!(nbr >= 0 && nbr <= 9))
 	{
@@ -29,14 +29,14 @@ void	write_nbr(char *str, int nbr, int lnt)
 	str[lnt] = (nbr % 10) + '0';
 }
 
-char	*ft_itoa(int n)
+char	*ft_itoa(int nbr)
 {
+	long	n;
 	char	*result;
-	int		i;
 	int		length;
 	int		isnegative;
 
-	i = 0;
+	n = nbr;
 	length = 0;
 	isnegative = 0;
 	if (n < 0)
@@ -46,11 +46,13 @@ char	*ft_itoa(int n)
 	}
 	length = get_length (n);
 	if (isnegative)
-		length++;	
-	result = malloc(sizeof(char) * length + 1);
+		length++;
+	result = (char *)malloc(sizeof(char) * length + 1);
+	if (!result)
+		return (NULL);
 	if (isnegative)
 		*result = '-';
 	write_nbr (result, n, length - 1);
-	result[length + 1] = '\0';
+	result[length] = '\0';
 	return (result);
 }
