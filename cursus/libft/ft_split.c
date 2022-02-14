@@ -6,7 +6,7 @@
 /*   By: odemirel <odemirel@student.42kocaeli.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 21:31:19 by odemirel          #+#    #+#             */
-/*   Updated: 2022/02/14 12:57:43 by odemirel         ###   ########.fr       */
+/*   Updated: 2022/02/14 16:01:57 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ static size_t	ft_count_word(char const *s, char c)
 
 	i = 0;
 	count = 0;
-	// while (s[i] == c && s[i])
-	// 	i++;
 	while (s[i])
 	{
 		while (s[i] != c && s[i])

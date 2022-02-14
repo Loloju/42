@@ -6,7 +6,7 @@
 #    By: odemirel <odemirel@student.42kocaeli.>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/09 21:33:47 by odemirel          #+#    #+#              #
-#    Updated: 2022/02/14 15:41:29 by odemirel         ###   ########.fr        #
+#    Updated: 2022/02/14 15:42:51 by odemirel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,11 +36,11 @@ $(NAME):
 		@echo "\n--> Compiling is complete"
 
 clean:
-		$(RM) *.o
+		@$(RM) *.o
 		@echo "\n--> Clensed"
 
 fclean: clean
-		$(RM) $(NAME)
+		@$(RM) $(NAME)
 		@echo "\n--> FULL CLENSED"
 
 re: fclean all
