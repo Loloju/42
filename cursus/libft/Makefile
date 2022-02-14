@@ -6,7 +6,7 @@
 #    By: odemirel <odemirel@student.42kocaeli.>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/09 21:33:47 by odemirel          #+#    #+#              #
-#    Updated: 2022/02/14 10:01:41 by odemirel         ###   ########.fr        #
+#    Updated: 2022/02/14 15:25:56 by odemirel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,10 +23,6 @@ BSRCS := $(shell find . -type f -name "ft_lst*.c")
 					# ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c \
 					# ft_lstclear.c ft_lstiter.c ft_lstmap.c
 
-OBJS = $(SRCS:.c=.o)
-
-BOBJS = $(BSRCS:.c=.o)
-
 CC = gcc
 RM = rm -f
 CFLAGS = -Wall -Wextra -Werror -I.
@@ -34,19 +30,24 @@ NAME = libft.a
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-		ar rcs $(NAME) $(OBJS)
+$(NAME):
+		@$(CC) $(CFLAGS) -c $(SRCS)
+		@ar rcs $(NAME) *.o
 		@echo "\n--> Compiling is complete"
+
 clean:
-		$(RM) $(OBJS) $(BOBJS)
+		$(RM) *.o
 		@echo "\n--> Clensed"
+
 fclean: clean
 		$(RM) $(NAME)
 		@echo "\n--> FULL CLENSED"
+
 re: fclean all
 
-bonus: $(NAME) $(BOBJS)
-		ar rcs $(NAME) $(OBJS) $(BOBJS)
+bonus:
+		@$(CC) $(CFLAGS) -c $(SRCS) $(BSRCS)
+		@ar rcs $(NAME) *.o
 		@echo "\n--> ALL COMPILED"
 
 .PHONY: all clean fclean re bonus
