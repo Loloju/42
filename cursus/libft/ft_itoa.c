@@ -6,13 +6,13 @@
 /*   By: odemirel <odemirel@student.42kocaeli.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 20:43:35 by odemirel          #+#    #+#             */
-/*   Updated: 2022/02/10 11:24:35 by odemirel         ###   ########.fr       */
+/*   Updated: 2022/02/14 10:13:31 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	get_length(long nbr)
+static int	get_length(long nbr)
 {
 	if (nbr >= 0 && nbr <= 9)
 		return (1);
@@ -20,7 +20,7 @@ int	get_length(long nbr)
 		return (1 + get_length(nbr / 10));
 }
 
-void	write_nbr(char *str, long nbr, int lnt)
+static void	write_nbr(char *str, long nbr, int lnt)
 {
 	if (!(nbr >= 0 && nbr <= 9))
 	{
