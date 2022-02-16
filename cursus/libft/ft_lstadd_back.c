@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: odemirel <odemirel@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: odemirel <odemirel@student.42kocaeli.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 21:28:06 by odemirel          #+#    #+#             */
-/*   Updated: 2022/02/09 21:28:09 by odemirel         ###   ########.fr       */
+/*   Updated: 2022/02/16 12:56:42 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
