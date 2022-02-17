@@ -6,7 +6,7 @@
 #    By: odemirel <odemirel@student.42kocaeli.>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/09 21:33:47 by odemirel          #+#    #+#              #
-#    Updated: 2022/02/14 16:38:19 by odemirel         ###   ########.fr        #
+#    Updated: 2022/02/17 11:09:18 by odemirel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,21 +33,21 @@ all: $(NAME)
 $(NAME):
 		@$(CC) $(CFLAGS) -c $(SRCS)
 		@ar rcs $(NAME) *.o
-		@echo "\n--> Compiling is complete"
+		@echo "\n\033[1;32m--> Compiling is complete"
 
 clean:
 		@$(RM) *.o
-		@echo "\n--> Clensed"
+		@echo "\n\033[1;34m--> Clensed"
 
 fclean: clean
 		@$(RM) $(NAME)
-		@echo "\n--> FULL CLENSED"
+		@echo "\n\033[1;34m--> FULL CLENSED"
 
 re: fclean all
 
 bonus:
 		@$(CC) $(CFLAGS) -c $(SRCS) $(BSRCS)
 		@ar rcs $(NAME) *.o
-		@echo "\n--> ALL COMPILED"
+		@echo "\n\033[1;32m--> ALL COMPILED"
 
 .PHONY: all clean fclean re bonus
