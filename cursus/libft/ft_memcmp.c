@@ -6,7 +6,7 @@
 /*   By: odemirel <odemirel@student.42kocaeli.com.t +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 12:46:40 by odemirel          #+#    #+#             */
-/*   Updated: 2022/02/22 15:31:37 by odemirel         ###   ########.fr       */
+/*   Updated: 2022/02/22 15:37:08 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,3 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 	}
 	return (0);
 }
-// iki stringi bellekte karsilastirir fark gordugunde char farkini return eder.
