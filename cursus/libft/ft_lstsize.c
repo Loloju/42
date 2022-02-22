@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: odemirel <odemirel@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: odemirel <odemirel@student.42kocaeli.com.t +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/09 21:29:32 by odemirel          #+#    #+#             */
-/*   Updated: 2022/02/09 21:29:35 by odemirel         ###   ########.fr       */
+/*   Created: 2022/02/22 12:00:32 by odemirel          #+#    #+#             */
+/*   Updated: 2022/02/22 15:31:17 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 int	ft_lstsize(t_list *lst)
 {
-	t_list	*decoy;
-	int		i;
+	int	i;
 
-	decoy = lst;
-	i = 0;
-	while (decoy)
+	i = 1;
+	if (!lst)
+		return (0);
+	while (lst->next)
 	{
+		lst = lst->next;
 		i++;
-		decoy = decoy->next;
 	}
 	return (i);
 }

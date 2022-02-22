@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: odemirel <odemirel@student.42kocaeli.>     +#+  +:+       +#+        */
+/*   By: odemirel <odemirel@student.42kocaeli.com.t +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/09 20:35:08 by odemirel          #+#    #+#             */
-/*   Updated: 2022/02/10 11:04:53 by odemirel         ###   ########.fr       */
+/*   Created: 2022/02/22 11:56:15 by odemirel          #+#    #+#             */
+/*   Updated: 2022/02/22 15:31:00 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <limits.h>
+#include "limits.h"
 
 static int	ft_isspace(char chr)
 {
@@ -20,43 +20,30 @@ static int	ft_isspace(char chr)
 	return (0);
 }
 
-static int	ft_isaret(char c, int *index)
-{
-	int	isaret;
-
-	isaret = 1;
-	if (c == '-' || c == '+')
-	{
-		if (c == '-')
-			isaret *= -1;
-		*index += 1;
-	}
-	return (isaret);
-}
-
 int	ft_atoi(const char *nptr)
 {
 	unsigned long	ret_val;
 	int				index;
-	int				isaret;
+	int				polarity;
 
+	polarity = 1;
 	index = 0;
-	ret_val = 0;
 	if (*nptr == '\0')
 		return (0);
 	while (ft_isspace(nptr[index]))
 		index++;
-	isaret = ft_isaret(nptr[index], &index);
-	while (nptr[index] >= '0' && nptr[index] <= '9')
+	if (nptr[index] == '-' || nptr[index] == '+')
 	{
-		ret_val = (ret_val * 10) + (nptr[index] - '0');
+		if (nptr[index] == '-')
+			polarity *= -1;
 		index++;
 	}
-	if (ret_val > LONG_MAX)
-	{
-		if (isaret == -1)
-			return (0);
+	ret_val = 0;
+	while (nptr[index] >= '0' && nptr[index] <= '9')
+		ret_val = (ret_val * 10) + (nptr[index++] - '0');
+	if (ret_val > LONG_MAX && polarity == -1)
+		return (0);
+	if (ret_val > LONG_MAX && polarity == 1)
 		return (-1);
-	}
-	return (ret_val * isaret);
+	return (ret_val * polarity);
 }

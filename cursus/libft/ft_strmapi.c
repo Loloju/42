@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: odemirel <odemirel@student.42kocaeli.>     +#+  +:+       +#+        */
+/*   By: odemirel <odemirel@student.42kocaeli.com.t +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/09 21:32:43 by odemirel          #+#    #+#             */
-/*   Updated: 2022/02/14 14:30:49 by odemirel         ###   ########.fr       */
+/*   Created: 2022/02/22 14:55:24 by odemirel          #+#    #+#             */
+/*   Updated: 2022/02/22 15:31:54 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,19 @@
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	unsigned int	index;
-	char			*ptr;
+	unsigned int	i;
+	char			*str;
 
-	index = 0;
-	if (!s)
-		return (ft_strdup(""));
-	else if (!f)
-		return (ft_strdup(s));
-	ptr = ft_strdup(s);
-	if (!ptr)
-		return (ptr = NULL);
-	while (s[index])
+	if (!s || !f)
+		return (NULL);
+	i = 0;
+	str = (char *) ft_calloc(ft_strlen(s) + 1, sizeof(char));
+	if (!str)
+		return (NULL);
+	while (s[i])
 	{
-		ptr[index] = (*f)(index, s[index]);
-		index++;
+		str[i] = f(i, s[i]);
+		i++;
 	}
-	return (ptr);
+	return (str);
 }

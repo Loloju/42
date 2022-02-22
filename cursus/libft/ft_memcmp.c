@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: odemirel <odemirel@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: odemirel <odemirel@student.42kocaeli.com.t +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/09 21:30:16 by odemirel          #+#    #+#             */
-/*   Updated: 2022/02/09 21:30:17 by odemirel         ###   ########.fr       */
+/*   Created: 2022/02/22 12:46:40 by odemirel          #+#    #+#             */
+/*   Updated: 2022/02/22 15:31:37 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,19 @@
 
 int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	const unsigned char		*s1_uc;
-	const unsigned char		*s2_uc;
-	size_t					index;
+	unsigned char	*buff_s1;
+	unsigned char	*buff_s2;
+	unsigned int	i;
 
-	index = 0;
-	s1_uc = (const unsigned char *)s1;
-	s2_uc = (const unsigned char *)s2;
-	while (index < n)
+	buff_s1 = (unsigned char *)s1;
+	buff_s2 = (unsigned char *)s2;
+	i = 0;
+	while (i < n)
 	{
-		if (s1_uc[index] != s2_uc[index])
-			return (s1_uc[index] - s2_uc[index]);
-		index++;
+		if (buff_s1[i] != buff_s2[i])
+			return (buff_s1[i] - buff_s2[i]);
+		i++;
 	}
 	return (0);
 }
+// iki stringi bellekte karsilastirir fark gordugunde char farkini return eder.

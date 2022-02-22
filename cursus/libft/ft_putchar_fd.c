@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: odemirel <odemirel@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: odemirel <odemirel@student.42kocaeli.com.t +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/09 21:30:45 by odemirel          #+#    #+#             */
-/*   Updated: 2022/02/09 21:30:46 by odemirel         ###   ########.fr       */
+/*   Created: 2022/02/22 14:12:56 by odemirel          #+#    #+#             */
+/*   Updated: 2022/02/22 15:31:42 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putchar_fd(char a, int fd)
+void	ft_putchar_fd(char c, int fd)
 {
-	write(fd, &a, 1);
+	write(fd, &c, 1);
 }

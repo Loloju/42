@@ -3,38 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: odemirel <odemirel@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: odemirel <odemirel@student.42kocaeli.com.t +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/09 21:28:59 by odemirel          #+#    #+#             */
-/*   Updated: 2022/02/09 21:29:00 by odemirel         ###   ########.fr       */
+/*   Created: 2022/02/22 12:00:04 by odemirel          #+#    #+#             */
+/*   Updated: 2022/02/22 15:31:15 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void*), void (*del)(void *))
 {
+	t_list	*first;
 	t_list	*new;
-	t_list	*decoy;
 
-	if (!lst || !f)
-		return (0);
-	new = ft_lstnew(f(lst->content));
-	if (!new)
-		return (0);
-	decoy = new;
-	lst = lst->next;
+	if (lst == NULL || f == NULL)
+		return (NULL);
+	first = NULL;
 	while (lst)
 	{
-		new->next = ft_lstnew(f(lst->content));
-		if (!new->next)
+		new = ft_lstnew((*f)(lst->content));
+		if (!new)
 		{
-			ft_lstclear(&decoy, del);
-			return (0);
+			ft_lstclear(&first, del);
+			return (NULL);
 		}
-		new = new->next;
+		ft_lstadd_back(&first, new);
 		lst = lst->next;
 	}
-	new->next = NULL;
-	return (decoy);
+	return (first);
 }

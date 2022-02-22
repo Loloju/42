@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: odemirel <odemirel@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: odemirel <odemirel@student.42kocaeli.com.t +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/09 21:28:43 by odemirel          #+#    #+#             */
-/*   Updated: 2022/02/09 21:28:44 by odemirel         ###   ########.fr       */
+/*   Created: 2022/02/22 11:57:49 by odemirel          #+#    #+#             */
+/*   Updated: 2022/02/22 15:31:28 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,11 @@
 
 void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	t_list	*decoy;
-
-	decoy = lst;
-	if (lst)
+	if (!f)
+		return ;
+	while (lst)
 	{
-		while (decoy)
-		{
-			f(decoy->content);
-			decoy = decoy->next;
-		}
+		(*f)(lst->content);
+		lst = lst->next;
 	}
 }

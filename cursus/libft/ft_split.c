@@ -3,73 +3,58 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: odemirel <odemirel@student.42kocaeli.>     +#+  +:+       +#+        */
+/*   By: odemirel <odemirel@student.42kocaeli.com.t +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/09 21:31:19 by odemirel          #+#    #+#             */
-/*   Updated: 2022/02/15 12:04:22 by odemirel         ###   ########.fr       */
+/*   Created: 2022/02/22 14:11:50 by odemirel          #+#    #+#             */
+/*   Updated: 2022/02/22 15:31:46 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	ft_count_word(char const *s, char c)
+unsigned int	str_in_array(const char *s, char delimiter)
 {
-	size_t	i;
-	size_t	count;
+	unsigned int	qnt;
 
-	i = 0;
-	count = 0;
-	while (s[i])
+	qnt = 0;
+	while (*s)
 	{
-		while (s[i] != c && s[i])
-			i++;
-		count++;
-		while (s[i] == c && s[i])
-			i++;
+		if (*s == delimiter)
+			s++;
+		else
+		{
+			while (*s != delimiter && *s)
+				s++;
+			qnt++;
+		}
 	}
-	return (count);
-}
-
-static char	*ft_strcreate(const char *s, char c, size_t i)
-{
-	size_t	len;
-	size_t	tmp;
-
-	len = 0;
-	tmp = i;
-	while (s[tmp] != c && s[tmp])
-	{
-		tmp++;
-		len++;
-	}
-	return (ft_substr(s, i, len));
+	return (qnt);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	size_t	i;
-	size_t	res_i;
-	char	**res;
+	char			**arr;
+	unsigned int	j;
+	unsigned int	a;
 
 	if (!s)
 		return (NULL);
-	res = (char **)malloc((ft_count_word(s, c) + 1) * sizeof(char *));
-	if (!res)
+	arr = (char **) ft_calloc(str_in_array(s, c) + 1, sizeof(char *));
+	if (!arr)
 		return (NULL);
-	i = 0;
-	res_i = 0;
-	while (s[i])
+	a = -1;
+	while (*s)
 	{
-		while (s[i] == c && s[i])
-			i++;
-		if (s[i])
+		if (*s == c)
+			s++;
+		else
 		{
-			res[res_i] = ft_strcreate(s, c, i);
-			res_i++;
+			j = 0;
+			while (*s != c && *s && ++j)
+				s++;
+			arr[++a] = (char *) ft_calloc(j + 1, sizeof(char));
+			ft_strlcpy(arr[a], s - j, j + 1);
 		}
-		while (s[i] != c && s[i])
-			i++;
 	}
-	res[res_i] = 0;
-	return (res);
+	return (arr);
 }

@@ -3,26 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: odemirel <odemirel@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: odemirel <odemirel@student.42kocaeli.com.t +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/09 21:30:38 by odemirel          #+#    #+#             */
-/*   Updated: 2022/02/09 21:30:38 by odemirel         ###   ########.fr       */
+/*   Created: 2022/02/22 14:12:48 by odemirel          #+#    #+#             */
+/*   Updated: 2022/02/22 15:31:40 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memset(void *str, int c, size_t n)
+void	*ft_memset(void *s, int c, size_t n)
 {
-	char	*ptr;
-	size_t	index;
+	size_t			i;
+	char			*buc;
 
-	ptr = (char *)str;
-	index = 0;
-	while (index < n)
+	i = 0;
+	buc = (char *)s;
+	while (i < n)
 	{
-		ptr[index] = c;
-		index++;
+		buc[i] = c;
+		i++;
 	}
-	return (ptr);
+	s = buc;
+	return (s);
 }

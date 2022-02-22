@@ -3,88 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: odemirel <odemirel@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: odemirel <odemirel@student.42kocaeli.com.t +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/09 21:33:10 by odemirel          #+#    #+#             */
-/*   Updated: 2022/02/09 21:33:11 by odemirel         ###   ########.fr       */
+/*   Created: 2022/02/22 14:20:01 by odemirel          #+#    #+#             */
+/*   Updated: 2022/02/22 15:31:58 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_trim_start(const char *s, const char *set)
+static int	ft_checkset(char c, char const *set)
 {
-	int	i;
-	int	j;
+	size_t	index;
 
-	i = 0;
-	while (s[i])
+	index = 0;
+	while (set[index])
 	{
-		j = 0;
-		while (set[j])
-		{
-			if (s[i] == set[j])
-			{
-				i++;
-				break ;
-			}
-			j++;
-		}
-		if (!set[j])
-			break ;
+		if (set[index++] == c)
+			return (1);
 	}
-	return (i);
+	return (0);
 }
 
-static int	ft_trim_end(const char *s, const char *set)
+char	*ft_strtrim(char const *s1, char const *set)
 {
-	int	i;
-	int	j;
+	char	*str;
+	size_t	start;
+	size_t	end;
+	size_t	index;
 
-	i = ft_strlen(s) - 1;
-	while (s[i])
-	{
-		j = 0;
-		while (set[j])
-		{
-			if (s[i] == set[j])
-			{
-				i--;
-				break ;
-			}
-			j++;
-		}
-		if (!set[j])
-			break ;
-	}
-	return (i);
-}
-
-char	*ft_strtrim(const char *s, const char *set)
-{
-	int		i;
-	int		j;
-	int		index;
-	char	*ptr;
-
-	ptr = NULL;
-	if (s && set)
-	{
-		i = ft_trim_end(s, set);
-		j = ft_trim_start(s, set);
-		if (i < j)
-			return (ft_strdup(""));
-		ptr = malloc (sizeof(char) * ((i + 1) - j + 1));
-		if (!ptr)
-			return (NULL);
-			index = 0;
-		while (j <= i)
-		{
-			ptr[index] = s[j];
-			index++;
-			j++;
-		}
-		ptr[index] = '\0';
-	}
-	return (ptr);
+	if (!s1 || !set)
+		return (NULL);
+	start = 0;
+	end = ft_strlen(s1);
+	while (s1[start] && ft_checkset(s1[start], set))
+		start++;
+	while (end > start && ft_checkset(s1[end - 1], set))
+		end--;
+	str = (char *)malloc(sizeof(char) * (end - start) + 1);
+	if (!str)
+		return (NULL);
+	index = 0;
+	while (start < end)
+		str[index++] = s1[start++];
+	str[index] = '\0';
+	return (str);
 }

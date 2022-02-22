@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: odemirel <odemirel@student.42kocaeli.>     +#+  +:+       +#+        */
+/*   By: odemirel <odemirel@student.42kocaeli.com.t +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/09 20:43:35 by odemirel          #+#    #+#             */
-/*   Updated: 2022/02/14 10:13:31 by odemirel         ###   ########.fr       */
+/*   Created: 2022/02/22 14:56:56 by odemirel          #+#    #+#             */
+/*   Updated: 2022/02/22 15:31:08 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

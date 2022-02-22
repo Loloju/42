@@ -3,24 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: odemirel <odemirel@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: odemirel <odemirel@student.42kocaeli.com.t +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/09 20:36:22 by odemirel          #+#    #+#             */
-/*   Updated: 2022/02/09 20:36:46 by odemirel         ###   ########.fr       */
+/*   Created: 2022/02/22 11:56:26 by odemirel          #+#    #+#             */
+/*   Updated: 2022/02/22 15:31:01 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_bzero(void *source, size_t n)
+void	ft_bzero(void *s, size_t n)
 {
-	char	*ptr;
-	size_t	index;
+	size_t	i;
+	char	*suc;
 
-	if (n == 0)
-		return ;
-	ptr = source;
-	index = 0;
-	while (index < n)
-		*(ptr + index++) = 0;
+	i = 0;
+	suc = (char *)s;
+	while (i < n)
+	{
+		suc[i] = 0;
+		i++;
+	}
+	s = suc;
 }

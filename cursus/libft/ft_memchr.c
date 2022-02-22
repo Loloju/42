@@ -3,28 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: odemirel <odemirel@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: odemirel <odemirel@student.42kocaeli.com.t +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/09 21:30:08 by odemirel          #+#    #+#             */
-/*   Updated: 2022/02/09 21:30:09 by odemirel         ###   ########.fr       */
+/*   Created: 2022/02/22 14:07:33 by odemirel          #+#    #+#             */
+/*   Updated: 2022/02/22 15:31:36 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memchr(const void *ptr, int c, size_t len)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	unsigned char	*nptr;
-	unsigned char	nc;
+	unsigned char	*temp;
 
-	nptr = (unsigned char *)ptr;
-	nc = (unsigned char)c;
-	while (len > 0)
-	{
-		if (*nptr == nc)
-			return (nptr);
-		nptr++;
-		len--;
-	}
+	temp = (unsigned char *)s;
+	while (n--)
+		if (*(temp++) == (unsigned char)c)
+			return ((void *)(temp - 1));
 	return (NULL);
 }

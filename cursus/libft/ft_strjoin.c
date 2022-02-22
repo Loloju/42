@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: odemirel <odemirel@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: odemirel <odemirel@student.42kocaeli.com.t +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/09 21:32:11 by odemirel          #+#    #+#             */
-/*   Updated: 2022/02/09 21:32:12 by odemirel         ###   ########.fr       */
+/*   Created: 2022/02/22 14:14:48 by odemirel          #+#    #+#             */
+/*   Updated: 2022/02/22 15:31:50 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,27 @@
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	size_t	s1_len;
-	size_t	s2_len;
-	char	*rtn;
+	unsigned int	i;
+	unsigned int	j;
+	char			*s3;
 
-	if (!s1 && !s2)
-		return (ft_strdup(""));
-	if (s1 && !s2)
-		return (ft_strdup(s1));
-	if (!s1 && s2)
-		return (ft_strdup(s2));
-	s1_len = ft_strlen((char *)s1);
-	s2_len = ft_strlen(s2);
-	rtn = malloc(sizeof(char) * (s1_len + s2_len + 1));
-	if (!rtn)
-		return (0);
-	ft_memmove(rtn, s1, s1_len);
-	ft_memmove(rtn + s1_len, s2, s2_len);
-	rtn[s1_len + s2_len] = '\0';
-	return (rtn);
+	if (!s1 || !s2)
+		return (NULL);
+	s3 = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (!s3)
+		return (NULL);
+	i = 0;
+	while (s1[i] != 0)
+	{
+		s3[i] = s1[i];
+		i++;
+	}
+	j = 0;
+	while (s2[j] != 0)
+	{
+		s3[i + j] = s2[j];
+		j++;
+	}
+	s3[i + j] = 0;
+	return (s3);
 }

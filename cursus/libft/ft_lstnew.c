@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: odemirel <odemirel@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: odemirel <odemirel@student.42kocaeli.com.t +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/09 21:29:21 by odemirel          #+#    #+#             */
-/*   Updated: 2022/02/09 21:29:22 by odemirel         ###   ########.fr       */
+/*   Created: 2022/02/22 12:00:14 by odemirel          #+#    #+#             */
+/*   Updated: 2022/02/22 15:31:16 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 t_list	*ft_lstnew(void *content)
 {
-	t_list	*decoy;
+	t_list	*new;
 
-	decoy = (t_list *)malloc(sizeof(t_list));
-	if (!decoy)
+	new = malloc(sizeof(t_list));
+	if (!new)
 		return (NULL);
-	decoy->content = content;
-	decoy->next = NULL;
-	return (decoy);
+	new->content = content;
+	new->next = NULL;
+	return (new);
 }

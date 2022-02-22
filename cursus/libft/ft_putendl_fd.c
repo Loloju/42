@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: odemirel <odemirel@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: odemirel <odemirel@student.42kocaeli.com.t +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/09 21:30:58 by odemirel          #+#    #+#             */
-/*   Updated: 2022/02/09 21:30:58 by odemirel         ###   ########.fr       */
+/*   Created: 2022/02/22 14:13:10 by odemirel          #+#    #+#             */
+/*   Updated: 2022/02/22 15:31:43 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,6 @@
 
 void	ft_putendl_fd(char *s, int fd)
 {
-	int	i;
-
-	if (s)
-	{
-		i = ft_strlen(s);
-		write(fd, s, i);
-	}
+	ft_putstr_fd(s, fd);
 	write(fd, "\n", 1);
 }

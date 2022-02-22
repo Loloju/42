@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: odemirel <odemirel@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: odemirel <odemirel@student.42kocaeli.com.t +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/09 21:28:28 by odemirel          #+#    #+#             */
-/*   Updated: 2022/02/09 21:28:28 by odemirel         ###   ########.fr       */
+/*   Created: 2022/02/22 11:57:35 by odemirel          #+#    #+#             */
+/*   Updated: 2022/02/22 15:31:11 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	t_list	*decoy;
-	t_list	*t;
+	t_list	*ptr;
 
-	decoy = *lst;
-	while (decoy)
+	ptr = *lst;
+	while (ptr)
 	{
-		(*del)(decoy->content);
-		t = decoy->next;
-		free(decoy);
-		decoy = t;
+		ptr = ptr->next;
+		if ((*lst)->next != NULL)
+			(*lst)->next = NULL;
+		ft_lstdelone(*lst, del);
+		*lst = ptr;
 	}
-	*lst = NULL;
+	free(ptr);
 }

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: odemirel <odemirel@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: odemirel <odemirel@student.42kocaeli.com.t +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/09 20:39:39 by odemirel          #+#    #+#             */
-/*   Updated: 2022/02/09 20:39:43 by odemirel         ###   ########.fr       */
+/*   Created: 2022/02/22 11:56:58 by odemirel          #+#    #+#             */
+/*   Updated: 2022/02/22 15:31:06 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isdigit(int a)
+int	ft_isdigit(int c)
 {
-	return (a >= '0' && a <= '9');
+	return (c >= '0' && c <= '9');
 }
