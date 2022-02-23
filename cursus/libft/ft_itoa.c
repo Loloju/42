@@ -6,7 +6,7 @@
 /*   By: odemirel <odemirel@student.42kocaeli.com.t +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 14:56:56 by odemirel          #+#    #+#             */
-/*   Updated: 2022/02/22 15:31:08 by odemirel         ###   ########.fr       */
+/*   Updated: 2022/02/23 11:26:57 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,7 @@ char	*ft_itoa(int nbr)
 	result = (char *)malloc(sizeof(char) * length + 1);
 	if (!result)
 		return (NULL);
-	if (isnegative)
-		*result = '-';
+	*result = '-';
 	write_nbr (result, n, length - 1);
 	result[length] = '\0';
 	return (result);
