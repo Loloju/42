@@ -1,10 +1,10 @@
 merhaba
 selamlar
-sedefin oturumu yine açılmadı
+sedefin oturumu yine acilmadi
 login problemi;
-	Sedef Akkaya: "hesabıma giremiyorum. sakkaya"
-	Mitat Enes Özdemir: "Tekrar dener misin?"
-	Sedef Akkaya: "Açıldı teşekkürler."
+	Sedef Akkaya: "hesabima erisemiyorum. sakkaya"
+	Mitat Enes Ozdemir: "Tekrar dener misin?"
+	Sedef Akkaya: "Acildi tesekkurler."
 ...
 piko
 mfdjkhfakajsfgkjw

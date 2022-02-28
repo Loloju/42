@@ -6,7 +6,7 @@
 /*   By: odemirel <odemirel@student.42kocaeli.com.t +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 16:45:22 by odemirel          #+#    #+#             */
-/*   Updated: 2022/02/22 15:48:11 by odemirel         ###   ########.fr       */
+/*   Updated: 2022/02/28 11:00:25 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,7 @@
 # endif
 
 char	*get_next_line(int fd);
+int		ft_strlen(char *lst);
+char	*ft_strjoin(const char *dest, const char *src);
 
 #endif
