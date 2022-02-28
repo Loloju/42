@@ -21,6 +21,11 @@ int	main( void )
 	while (b != 0)
 	{
 		b = read(x, a, BUFFER_SIZE);
+		i = 0;
+		while (a[i])
+		{
+			
+		}
 		t = ft_strjoin(t, a);
 	}
 	printf("%s\n", t);
