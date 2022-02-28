@@ -7,11 +7,12 @@
 
 int	main( void )
 {
-	int		x;
-	int		b;
-	int		i;
-	char	*a;
-	char	*t;
+	int			x;
+	int			b;
+	int			i;
+	char		*a;
+	char		*t;
+	static char	*buffer;
 
 	b = 1;
 	i = 0;
@@ -24,7 +25,11 @@ int	main( void )
 		i = 0;
 		while (a[i])
 		{
-			
+			if(a[i] == '\n')
+			{
+				
+			}
+			i++;
 		}
 		t = ft_strjoin(t, a);
 	}
