@@ -6,7 +6,7 @@
 /*   By: odemirel <odemirel@student.42kocaeli.com.t +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 16:45:17 by odemirel          #+#    #+#             */
-/*   Updated: 2022/02/28 11:01:31 by odemirel         ###   ########.fr       */
+/*   Updated: 2022/03/02 15:18:52 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,40 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	}
 	s3[i + j] = 0;
 	return (s3);
+}
+
+char	*buff_rest(char *str)
+{
+	int		length;
+	int		i;
+	char	*buff;
+
+	length = ft_strlen(str);
+	printf("\n%d\n", length);
+	buff = malloc(sizeof(char) * (length + 1));
+	if (!buff)
+		return (NULL);
+	i = 0;
+	while (i < length)
+	{
+		buff[i] = str[i];
+		i++;
+	}
+	buff[i] = '\0';
+	return (buff);
+}
+
+void	ft_bzero(void *s, size_t n)
+{
+	size_t	i;
+	char	*suc;
+
+	i = 0;
+	suc = (char *)s;
+	while (i < n)
+	{
+		suc[i] = 0;
+		i++;
+	}
+	s = suc;
 }

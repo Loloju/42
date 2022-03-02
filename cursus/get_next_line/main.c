@@ -5,33 +5,12 @@
 #include <stdlib.h>
 #include "get_next_line.h"
 
-int	main( void )
+int	main(void)
 {
-	int			x;
-	int			b;
-	int			i;
-	char		*a;
-	char		*t;
-	static char	*buffer;
+	int				x;
+	char			*a;
 
-	b = 1;
-	i = 0;
-	a = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
-	t = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
 	x = open("asd.txt", O_RDONLY, 774);
-	while (b != 0)
-	{
-		b = read(x, a, BUFFER_SIZE);
-		i = 0;
-		while (a[i])
-		{
-			if(a[i] == '\n')
-			{
-				
-			}
-			i++;
-		}
-		t = ft_strjoin(t, a);
-	}
-	printf("%s\n", t);
+	while((a = get_next_line(x)))
+		printf("\n\t(%s)\n", a);
 }
