@@ -6,7 +6,7 @@
 /*   By: odemirel <odemirel@student.42kocaeli.com.t +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 16:45:20 by odemirel          #+#    #+#             */
-/*   Updated: 2022/03/02 15:20:14 by odemirel         ###   ########.fr       */
+/*   Updated: 2022/03/02 17:13:46 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,14 @@ char	*get_next_line(int fd)
 				if (!buffer)
 					return (NULL);
 				t = ft_strjoin(t, a);
-				printf("%s",a);
+				printf("%s", a);
 				printf("\\");
 				return (t);
 			}
 			i++;
 		}
 		t = ft_strjoin(t, a);
-		printf("%s\n",a);
+		printf("%s\n", a);
 	}
 	return (NULL);
 }

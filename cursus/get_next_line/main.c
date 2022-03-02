@@ -13,4 +13,6 @@ int	main(void)
 	x = open("asd.txt", O_RDONLY, 774);
 	while((a = get_next_line(x)))
 		printf("\n\t(%s)\n", a);
+	close(x);
+	return (0);
 }
