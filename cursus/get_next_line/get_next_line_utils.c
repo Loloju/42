@@ -5,82 +5,67 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: odemirel <odemirel@student.42kocaeli.com.t +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/14 16:45:17 by odemirel          #+#    #+#             */
-/*   Updated: 2022/03/02 15:18:52 by odemirel         ###   ########.fr       */
+/*   Created: 2022/02/11 11:25:58 by fcil              #+#    #+#             */
+/*   Updated: 2022/03/03 15:56:09 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	ft_strlen(char *lst)
+size_t	ft_strlen(const char *s)
 {
-	int		i;
+	size_t	i;
 
 	i = 0;
-	while (lst[i] != '\0')
+	if (!s)
+		return (0);
+	while (s[i])
 		i++;
 	return (i);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strchr(const char *s, int c)
+{
+	int	s_len;
+
+	if (!s)
+		return (0);
+	s_len = ft_strlen(s);
+	while (s_len >= 0)
+	{
+		if (*s == (char)c)
+			return ((char *)s);
+		s++;
+		s_len--;
+	}
+	return (NULL);
+}
+
+char	*ft_strjoin(char *s1, const char *s2)
 {
 	unsigned int	i;
 	unsigned int	j;
 	char			*s3;
 
+	if (!s1)
+	{
+		s1 = (char *)malloc(1 * sizeof(char));
+		s1[0] = '\0';
+	}
 	if (!s1 || !s2)
 		return (NULL);
-	s3 = malloc(ft_strlen((char *)s1) + ft_strlen((char *)s2) + 1);
+	s3 = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
 	if (!s3)
 		return (NULL);
-	i = 0;
-	while (s1[i] != 0)
-	{
+	i = -1;
+	while (s1[++i] != 0)
 		s3[i] = s1[i];
-		i++;
-	}
-	j = 0;
-	while (s2[j] != 0)
+	j = -1;
+	while (s2[++j] != 0)
 	{
 		s3[i + j] = s2[j];
-		j++;
 	}
 	s3[i + j] = 0;
+	free(s1);
 	return (s3);
-}
-
-char	*buff_rest(char *str)
-{
-	int		length;
-	int		i;
-	char	*buff;
-
-	length = ft_strlen(str);
-	printf("\n%d\n", length);
-	buff = malloc(sizeof(char) * (length + 1));
-	if (!buff)
-		return (NULL);
-	i = 0;
-	while (i < length)
-	{
-		buff[i] = str[i];
-		i++;
-	}
-	buff[i] = '\0';
-	return (buff);
-}
-
-void	ft_bzero(void *s, size_t n)
-{
-	size_t	i;
-	char	*suc;
-
-	i = 0;
-	suc = (char *)s;
-	while (i < n)
-	{
-		suc[i] = 0;
-		i++;
-	}
-	s = suc;
 }

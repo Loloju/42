@@ -6,7 +6,7 @@
 /*   By: odemirel <odemirel@student.42kocaeli.com.t +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 16:45:22 by odemirel          #+#    #+#             */
-/*   Updated: 2022/03/02 16:07:52 by odemirel         ###   ########.fr       */
+/*   Updated: 2022/03/03 15:58:29 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,13 @@
 #  define BUFFER_SIZE 4
 # endif
 
+size_t	ft_strlen(const char *s);
+
 char	*get_next_line(int fd);
-int		ft_strlen(char *lst);
-char	*ft_strjoin(const char *dest, const char *src);
+char	*ft_strjoin(char *s1, const char *s2);
 char	*buff_rest(char *str);
+char	*ft_strchr(const char *s, int c);
+
 void	ft_bzero(void *s, size_t n);
 
 #endif

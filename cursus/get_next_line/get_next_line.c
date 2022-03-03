@@ -5,54 +5,114 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: odemirel <odemirel@student.42kocaeli.com.t +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/14 16:45:20 by odemirel          #+#    #+#             */
-/*   Updated: 2022/03/02 17:13:46 by odemirel         ###   ########.fr       */
+/*   Created: 2022/02/10 14:20:50 by fcil              #+#    #+#             */
+/*   Updated: 2022/03/03 16:00:23 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
+
+char	*ft_get_line(char *kalan)
+{
+	int		i;
+	char	*str;
+
+	i = 0;
+	if (!kalan[i])
+		return (NULL);
+	while (kalan[i] && kalan[i] != '\n')
+		i++;
+	str = (char *)malloc(sizeof(char) * (i + 2));
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (kalan[i] && kalan[i] != '\n')
+	{
+		str[i] = kalan[i];
+		i++;
+	}
+	if (kalan[i] == '\n')
+	{
+		str[i] = kalan[i];
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
+}
+
+char	*ft_new_left_str(char *kalan)
+{
+	int		i;
+	int		j;
+	char	*str;
+
+	i = 0;
+	while (kalan[i] && kalan[i] != '\n')
+		i++;
+	if (!kalan[i])
+	{
+		free(kalan);
+		return (NULL);
+	}
+	str = (char *)malloc(sizeof(char) * (ft_strlen(kalan) - i + 1));
+	if (!str)
+		return (NULL);
+	i++;
+	j = 0;
+	while (kalan[i])
+		str[j++] = kalan[i++];
+	str[j] = '\0';
+	free(kalan);
+	return (str);
+}
+
+char	*ft_read_to_left_str(int fd, char *kalan)
+{
+	char	*buff;
+	int		rd_bytes;
+
+	buff = malloc((BUFFER_SIZE + 1) * sizeof(char));
+	if (!buff)
+		return (NULL);
+	rd_bytes = 1;
+	while (!ft_strchr(kalan, '\n') && rd_bytes != 0)
+	{
+		rd_bytes = read(fd, buff, BUFFER_SIZE);
+		if (rd_bytes == -1)
+		{
+			free(buff);
+			return (NULL);
+		}
+		buff[rd_bytes] = '\0';
+		kalan = ft_strjoin(kalan, buff);
+	}
+	free(buff);
+	return (kalan);
+}
 
 char	*get_next_line(int fd)
 {
-	int				i;
-	char			*a;
-	char			*t;
-	static char		*buffer;
+	char		*str;
+	static char	*kalan;
 
-	i = 0;
-	a = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
-	t = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
-	if (buffer)
-	{
-		printf("\nbuffer : %s\n\n", buffer);
-		free(t);
-		t = (char *)malloc(sizeof(char)
-				*(BUFFER_SIZE + ft_strlen(buffer) + 1));
-		t = ft_strjoin(t, buffer);
-		ft_bzero(buffer, ft_strlen(buffer));
-		free(buffer);
-	}
-	while (read(fd, a, BUFFER_SIZE) > 0)
-	{
-		i = 0;
-		while (a[i])
-		{
-			if (a[i] == '\n')
-			{
-				a[i] = '\0';
-				buffer = buff_rest(&a[i + 1]);
-				if (!buffer)
-					return (NULL);
-				t = ft_strjoin(t, a);
-				printf("%s", a);
-				printf("\\");
-				return (t);
-			}
-			i++;
-		}
-		t = ft_strjoin(t, a);
-		printf("%s\n", a);
-	}
-	return (NULL);
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (0);
+	kalan = ft_read_to_left_str(fd, kalan);
+	if (!kalan)
+		return (NULL);
+	str = ft_get_line(kalan);
+	kalan = ft_new_left_str(kalan);
+	return (str);
 }
+
+//main function
+// int	main()
+// {
+// 	int fd = open("asd.txt", O_RDONLY);
+//  	char  *str;
+
+// 	for (int i = 0; i < 10; i++) {
+//   		str = get_next_line(fd);
+//  		write(1, str, ft_strlen(str));
+// 	}
+// }
