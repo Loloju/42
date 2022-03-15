@@ -6,7 +6,7 @@
 /*   By: odemirel <odemirel@student.42kocaeli.com.t +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 10:48:02 by odemirel          #+#    #+#             */
-/*   Updated: 2022/03/15 10:33:20 by odemirel         ###   ########.fr       */
+/*   Updated: 2022/03/15 16:59:32 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,20 +39,21 @@ int	check_flag(char c, va_list args, int len)
 {
 	if (c == 'c')
 		return (len += ft_putchar_len(va_arg(args, char), len));
-	else if (c == 's')
+	if (c == 's')
 		return (len += ft_putstr_len(va_arg(args, char *), len));
-	else if (c == 'p')
+	if (c == 'p')
 		return (len += ft_putptr_len(va_arg(args, int), len));
-	else if (c == 'd')
+	if (c == 'd')
 		return (len += ft_itoa_len(va_arg(args, int), len));
-	else if (c == 'i')
+	if (c == 'i')
 
-	else if (c == 'u')
+	if (c == 'u')
 
-	else if (c == 'x' || c == 'X')
-
-	else if (c == '%')
+	if (c == 'x' || c == 'X')
+		return (len += ft_puthex_len(va_arg(args, int), len));
+	if (c == '%')
 		return (len += ft_putchar_len('%', len));
+	return (0);
 }
 
 int	ft_printf(const char *str, ...)
