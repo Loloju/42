@@ -6,29 +6,86 @@
 /*   By: odemirel <odemirel@student.42kocaeli.com.t +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 10:48:02 by odemirel          #+#    #+#             */
-/*   Updated: 2022/03/08 15:15:58 by odemirel         ###   ########.fr       */
+/*   Updated: 2022/03/15 10:33:20 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdio.h>
 
-int	ft_printf(const char *count, ...)
+static char	*birlestir(char *s1, const char *s2, int n)
 {
-	va_list		valist;
-	//int			i;
-	char		*a;
-	char		*b = (char *)count;
+	char	*s3;
+	int		i;
+	int		j;
 
-	va_start(valist, count);
-	a = va_arg(valist, char *);
-	va_end(valist);
-	ft_putendl_fd(b,1);
-	return (0);
+	s3 = malloc(sizeof(char) * (ft_strlen(s1) + n + 1));
+	if (!s3)
+		return (NULL);
+	s3 = ft_strjoin(s3, s1);
+	i = ft_strlen(s3);
+	j = 0;
+	while (s2[j])
+	{
+		s3[i] = s2[j];
+		i++;
+		j++;
+	}
+	s3[i] = '\0';
+	return (s3);
 }
 
-int	main( void )
+int	check_flag(char c, va_list args, int len)
 {
-	ft_printf("yelloooo");
+	if (c == 'c')
+		return (len += ft_putchar_len(va_arg(args, char), len));
+	else if (c == 's')
+		return (len += ft_putstr_len(va_arg(args, char *), len));
+	else if (c == 'p')
+		return (len += ft_putptr_len(va_arg(args, int), len));
+	else if (c == 'd')
+		return (len += ft_itoa_len(va_arg(args, int), len));
+	else if (c == 'i')
+
+	else if (c == 'u')
+
+	else if (c == 'x' || c == 'X')
+
+	else if (c == '%')
+		return (len += ft_putchar_len('%', len));
+}
+
+int	ft_printf(const char *str, ...)
+{
+	va_list	valist;
+	int		i;
+	int		len;
+	char	*string;
+
+	i = 0;
+	va_start(valist, str);
+	while (str[i] != '\0')
+	{
+		if (str[i] != '%')
+		{
+			ft_putchar_fd(str[i], 1);
+			len++;
+		}
+		else
+		{
+			if (str[i + 1] != NULL)
+			{
+				len += check_flag(str[i++], valist, len);
+				i++;
+			}
+			else
+				return (-1);
+		}
+	}
+}
+
+int	main(void)
+{
+	ft_printf("yelloooo", "asd", "zxc", "askfadsf", "asdf");
 	return (0);
 }
