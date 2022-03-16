@@ -6,7 +6,7 @@
 /*   By: odemirel <odemirel@student.42kocaeli.com.t +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 10:48:02 by odemirel          #+#    #+#             */
-/*   Updated: 2022/03/15 16:59:32 by odemirel         ###   ########.fr       */
+/*   Updated: 2022/03/16 14:01:52 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,10 @@ int	check_flag(char c, va_list args, int len)
 		return (len += ft_putstr_len(va_arg(args, char *), len));
 	if (c == 'p')
 		return (len += ft_putptr_len(va_arg(args, int), len));
-	if (c == 'd')
+	if (c == 'd' || c == 'i')
 		return (len += ft_itoa_len(va_arg(args, int), len));
-	if (c == 'i')
-
 	if (c == 'u')
-
+		return (len += ft_unsigned_len(va_arg(args, int), len));
 	if (c == 'x' || c == 'X')
 		return (len += ft_puthex_len(va_arg(args, int), len));
 	if (c == '%')
