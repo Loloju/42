@@ -6,7 +6,7 @@
 /*   By: odemirel <odemirel@student.42kocaeli.com.t +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 10:48:02 by odemirel          #+#    #+#             */
-/*   Updated: 2022/03/22 16:57:55 by odemirel         ###   ########.fr       */
+/*   Updated: 2022/03/24 16:14:40 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ static int	check_flag(char c, va_list args)
 		return (len += ft_putstr_len(va_arg(args, char *)));
 	if (c == 'p')
 		return (len += ft_putptr_len(va_arg(args, int)));
-	/* if (c == 'd' || c == 'i')
+	if (c == 'd' || c == 'i')
 		return (len += ft_itoa_len(va_arg(args, int)));
-	if (c == 'u')
+	/*if (c == 'u')
 		return (len += ft_unsigned_len(va_arg(args, int)));
 	if (c == 'x' || c == 'X')
 		return (len += ft_puthex_len(va_arg(args, int))); */
-	// if (c == '%')
-	// 	return (len += ft_putchar_len('%'));
+	if (c == '%')
+		return (len += ft_putchar_len('%'));
 	return (0);
 }
 
@@ -47,10 +47,7 @@ int	ft_printf(const char *str, ...)
 	while (str[i] != '\0')
 	{
 		if (str[i] != '%')
-		{
-			ft_putchar_fd(str[i], 1);
-			len++;
-		}
+			len += ft_putchar_len(str[i]);
 		else
 		{
 			if (str[i + 1] != '\0')
@@ -59,7 +56,7 @@ int	ft_printf(const char *str, ...)
 			}
 			else
 				return (-1);
-		}
+		} 
 		i++;
 	}
 	return (len);
@@ -67,6 +64,7 @@ int	ft_printf(const char *str, ...)
 
 int	main(void)
 {
-	int	a = ft_printf("yelloooo %s\n", "hello there");
+	int	a = ft_printf("yelloooo %s %c %d\n", "hello there is", 'a', "13");
+	printf("%d %p\n",a, &a);
 	return (0);
 }
