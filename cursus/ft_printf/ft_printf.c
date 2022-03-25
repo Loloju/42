@@ -6,13 +6,13 @@
 /*   By: odemirel <odemirel@student.42kocaeli.com.t +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 10:48:02 by odemirel          #+#    #+#             */
-/*   Updated: 2022/03/24 16:14:40 by odemirel         ###   ########.fr       */
+/*   Updated: 2022/03/25 14:54:40 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdio.h>
-
+#include <limits.h>
 static int	check_flag(char c, va_list args)
 {
 	int	len;
@@ -23,13 +23,13 @@ static int	check_flag(char c, va_list args)
 	if (c == 's')
 		return (len += ft_putstr_len(va_arg(args, char *)));
 	if (c == 'p')
-		return (len += ft_putptr_len(va_arg(args, int)));
+		return (len += ft_putptr_len(va_arg(args, unsigned long long)));
 	if (c == 'd' || c == 'i')
 		return (len += ft_itoa_len(va_arg(args, int)));
 	/*if (c == 'u')
-		return (len += ft_unsigned_len(va_arg(args, int)));
+		return (len += ft_unsigned_len(va_arg(args, unsigned int))); */
 	if (c == 'x' || c == 'X')
-		return (len += ft_puthex_len(va_arg(args, int))); */
+		return (len += ft_puthex_len(va_arg(args, unsigned int), c));
 	if (c == '%')
 		return (len += ft_putchar_len('%'));
 	return (0);
@@ -56,7 +56,7 @@ int	ft_printf(const char *str, ...)
 			}
 			else
 				return (-1);
-		} 
+		}
 		i++;
 	}
 	return (len);
@@ -64,7 +64,9 @@ int	ft_printf(const char *str, ...)
 
 int	main(void)
 {
-	int	a = ft_printf("yelloooo %s %c %d\n", "hello there is", 'a', "13");
-	printf("%d %p\n",a, &a);
+	int b = 0;
+	int	a = ft_printf("yelloooo %s %c %d %x %x %x %p\n", "hello there is", 'a', 13, 5555, -5555, INT_MAX, &b);
+	int c = printf("yelloooo %s %c %d %x %x %x %p\n", "hello there is", 'a', 13, 5555, -5555, INT_MAX, &b);
+	printf("ft: %d pf: %d", a, c);
 	return (0);
 }
