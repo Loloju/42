@@ -22,7 +22,7 @@ $(NAME):
 	@gcc $(FLAGS) -c $(SRCS) -I.
 	@ar rcs $(NAME) *.o
 	@echo "\033[1;32m╔════════════════════════════════════════╗"
-	@echo "\033[1;32m║        ⫷ OBJELER TEMIZLENDI!⫸          ║"
+	@echo "\033[1;32m║              ⫷ COMPILED!⫸              ║"
 	@echo "\033[1;32m╚════════════════════════════════════════╝"
 
 clean:

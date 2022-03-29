@@ -14,7 +14,7 @@
 
 static int	get_length(unsigned long nbr)
 {
-	if (nbr >= 0 && nbr <= 9)
+	if (nbr <= 9)
 		return (1);
 	else
 		return (1 + get_length(nbr / 10));
@@ -22,7 +22,7 @@ static int	get_length(unsigned long nbr)
 
 static void	write_nbr(char *str, unsigned long nbr, int lnt)
 {
-	if (!(nbr >= 0 && nbr <= 9))
+	if (!(nbr <= 9))
 	{
 		write_nbr(str, nbr / 10, lnt - 1);
 	}

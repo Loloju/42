@@ -14,7 +14,7 @@
 
 static int	x_get_length(unsigned long long nbr)
 {
-	if (nbr >= 0 && nbr <= 15)
+	if (nbr <= 15)
 		return (1);
 	else
 		return (1 + x_get_length(nbr / 16));
@@ -22,7 +22,7 @@ static int	x_get_length(unsigned long long nbr)
 
 static void	write_hex(char *str, unsigned long long nbr, int lnt, char x)
 {
-	if (!(nbr >= 0 && nbr <= 15))
+	if (!(nbr <= 15))
 	{
 		write_hex(str, nbr / 16, lnt - 1, x);
 	}
