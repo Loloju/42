@@ -6,33 +6,35 @@
 /*   By: odemirel <odemirel@student.42kocaeli.com.t +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 15:42:53 by odemirel          #+#    #+#             */
-/*   Updated: 2022/05/17 17:57:45 by odemirel         ###   ########.fr       */
+/*   Updated: 2022/05/18 18:13:39 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 #include <stdio.h>
 
-void	action(int signal, siginfo_t *client_pid, void *prevact)
+void	action(int signal, siginfo_t *signal_info, void *prevact)
 {
 	static int				i = 0;
 	static pid_t			pid = 0;
 	static unsigned char	c;
-	static int				flag = 0;
 
 	( void ) prevact;
-	pid = client_pid->si_pid;
+	pid = signal_info->si_pid;
 	c |= (signal == SIGUSR2);
 	if (++i == 8)
 	{
 		i = 0;
 		if (!c)
 		{
-			//kill(client_pid, SIGUSR1);
+			kill(pid, SIGUSR1);
+			printf("\n");
 			pid = 0;
 			return ;
 		}
 		ft_printf("%c", c);
+		kill(pid, SIGUSR2);
+		usleep(100);
 		c = 0;
 	}
 	else
@@ -41,10 +43,8 @@ void	action(int signal, siginfo_t *client_pid, void *prevact)
 
 int	main( void )
 {
-	int					i;
 	struct sigaction	s_sigaction;
 
-	i = 0;
 	s_sigaction.sa_sigaction = action;
 	s_sigaction.sa_flags = SA_SIGINFO;
 	ft_printf("%d\n", getpid());
