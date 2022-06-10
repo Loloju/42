@@ -6,7 +6,7 @@
 /*   By: odemirel <odemirel@student.42kocaeli.com.t +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 10:21:32 by odemirel          #+#    #+#             */
-/*   Updated: 2022/06/03 16:14:47 by odemirel         ###   ########.fr       */
+/*   Updated: 2022/06/10 17:36:53 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,17 @@
 # include "MiniLibX/mlx.h"
 # include "get_next_line/get_next_line.h"
 
+# define IMG 64
 # define W 13
 # define A 0
 # define S 1
 # define D 2
 # define E 14
 # define ESC 53
+# define GND "tiles/gnd.xpm"
+# define WLL "tiles/wall.xpm"
+# define PLR "tiles/plyr.xpm"
+# define EXT "tiles/exit.xpm"
 
 typedef struct window{
 	int		x_size;
@@ -33,14 +38,24 @@ typedef struct window{
 
 typedef struct player
 {
-	int	pos_x;
-	int	pos_y;
-	int	coin_count;
+	int	px;
+	int	py;
+	int	ccnt;
+	int	mcnt;
 	int	hp;
 }	t_plyr;
 
+typedef struct game
+{
+	char	**map;
+	int		m_x_size;
+	int		m_y_size;
+}	t_game;
+
 typedef struct tiles
 {
+	int		hgt;
+	int		wdt;
 	void	*bg;
 	void	*gnd;
 	void	*wall;
@@ -53,6 +68,7 @@ typedef struct vars
 	t_plyr		*plyr;
 	t_tiles		*tile;
 	t_window	*win;
+	t_game		*game;
 }	t_vars;
 
 #endif
