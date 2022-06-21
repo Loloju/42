@@ -6,7 +6,7 @@
 #    By: odemirel <odemirel@student.42kocaeli.com.t +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/25 10:16:38 by odemirel          #+#    #+#              #
-#    Updated: 2022/05/30 17:13:30 by odemirel         ###   ########.fr        #
+#    Updated: 2022/06/21 15:36:18 by odemirel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,7 @@ all: $(NAME)
 
 $(NAME):
 	@make -C $(LIB)
-	@mv get_next_line/getnextline.a .
-	@gcc $(FLAGS) $(OPENGLFLAGS) getnextline.a so_long.c so_long.h
+	@gcc $(FLAGS) $(OPENGLFLAGS) so_long.c get_line.c ../libft/ft_strjoin.c ../libft/ft_strlen.c ../libft/ft_strchr.c so_long.h -g
 	@mv a.out so_long
 	@echo "\033[36;5m\tSo_long Compiled!\033[0m"
 

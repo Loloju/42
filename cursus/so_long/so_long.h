@@ -6,7 +6,7 @@
 /*   By: odemirel <odemirel@student.42kocaeli.com.t +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 10:21:32 by odemirel          #+#    #+#             */
-/*   Updated: 2022/06/10 17:36:53 by odemirel         ###   ########.fr       */
+/*   Updated: 2022/06/21 16:14:32 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # define D 2
 # define E 14
 # define ESC 53
-# define GND "tiles/gnd.xpm"
+# define GND "tiles/grass.xpm"
 # define WLL "tiles/wall.xpm"
 # define PLR "tiles/plyr.xpm"
 # define EXT "tiles/exit.xpm"
@@ -71,4 +71,5 @@ typedef struct vars
 	t_game		*game;
 }	t_vars;
 
+char	*get_line(int fd, int *flag);
 #endif

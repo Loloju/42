@@ -6,7 +6,7 @@
 /*   By: odemirel <odemirel@student.42kocaeli.com.t +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 10:26:20 by odemirel          #+#    #+#             */
-/*   Updated: 2022/06/10 17:37:38 by odemirel         ###   ########.fr       */
+/*   Updated: 2022/06/21 16:05:32 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,49 +68,46 @@ int	key_control(int keycode, t_vars *v)
 	return (1);
 }
 
-t_window	*mlx_instance_init(char **av)
+t_window	*mlx_instance_init(char **av, t_vars *v)
 {
 	t_window	*win;
 
-	printf("test1");
 	win = (t_window *) malloc(sizeof(t_window));
-	win->x_size = 1024;
-	win->y_size = 768;
+	win->x_size = v->game->m_x_size * IMG;
+	win->y_size = v->game->m_y_size * IMG;
+	printf("%d x %d", win->x_size, win->y_size);
 	win->title = av[1];
 	win->p_mlx = mlx_init();
 	if (win->p_mlx != 0)
 	{
-		printf("test2");
 		win->p_win = mlx_new_window(win->p_mlx, win->x_size,
 				win->y_size, win->title);
 	}
 	else
 	{
-		printf("test3");
 		return (0);
 	}
-	printf("test4");
 	return (win);
 }
 
 t_tiles	*tiles_init(t_window *win)
 {
 	t_tiles	*t;
-	t = (t_tiles *) malloc(sizeof(t_tiles));
 
+	t = (t_tiles *) malloc(sizeof(t_tiles));
 	t->gnd = mlx_xpm_file_to_image(win->p_mlx, GND, &t->wdt, &t->hgt);
 	t->wall = mlx_xpm_file_to_image(win->p_mlx, WLL, &t->wdt, &t->hgt);
 	t->exit = mlx_xpm_file_to_image(win->p_mlx, EXT, &t->wdt, &t->hgt);
 	return (t);
 }
 
-/*region*/
-static int stlen(char *s)
+/*region*///count_map_size kullanıyor
+static int stlen(char *str)
 {
 	int	i;
 
 	i = 0;
-	while (s[i] != '\0')
+	while (str[i] != '\0')
 	{
 		i++;
 	}
@@ -120,23 +117,48 @@ static int stlen(char *s)
 void	count_map_size(char *str, t_vars *v)
 {
 	int		fd;
+	// int		i;
 	char	*a;
-	int		line_count;
+	char	*b = "a";
 
+/* region *///map_size
+	printf("map_size");
+	fflush(stdout);
 	fd = open(str, O_RDONLY);
-	a = get_next_line(fd);
+	a = get_line(fd);
 	v->game->m_x_size = stlen(a);
-	close(fd);
-	fd = open(str, O_RDONLY);
-	line_count = 1;
-	while (a)
+	v->game->m_y_size = 1;
+	while (b)
 	{
-		a = get_next_line(fd);
-		line_count++;
+		b = get_line(fd);
+		v->game->m_y_size++;
 	}
-	v->game->m_y_size = line_count;
-	free(a);
 	close(fd);
+/*end region*/
+	v->game->map = (char **) malloc(sizeof(char *) * v->game->m_y_size);
+/* region */ 
+	// assign_map (a null geliyor)
+	/* printf("map_assign");
+	fd = open(str, O_RDONLY);
+	i = 0;
+	while (i <= v->game->m_y_size)
+	{
+		a = get_line(fd);
+		if (stlen(a) == v->game->m_x_size)
+		{
+			v->game->map[i] = a;
+			write(1, v->game->map[i], stlen(v->game->map[i]));
+			write(1,"a",1);
+			i++;
+		}
+		else
+		{
+			printf("map error x size differ..");
+			exit(1);
+		}
+		i++;
+	}
+	close(fd); */
 }
 /*end region*/
 
@@ -155,34 +177,24 @@ t_plyr *player_init( void )
 
 int	main(int ac, char **av)
 {
-	//t_game		*game;
 	t_vars		vars;
 
 	if (ac > 1)
 	{
-		vars.win = mlx_instance_init(av);
+		printf("%s\n", av[1]);
+		vars.game = (t_game *) malloc(sizeof(t_game));
+		count_map_size(av[1], &vars);
+		vars.win = mlx_instance_init(av, &vars);
 		if (vars.win == 0)
 			return (-1);
 		vars.plyr = player_init();
 		vars.tile = tiles_init(vars.win);
-		int i = 0;
- 		while (i < 768/64)
-		 {
-			int j = 0;
-			while (j < 1024/64)
-			{
-				mlx_put_image_to_window(vars.win->p_mlx,vars.win->p_win,vars.tile->gnd,j*64,i*64);
-				j++;
-			}
-			i++;
-		 }
-		//count_map_size(av[1], &vars);
 		vars.plyr->mcnt += mlx_key_hook(vars.win->p_win, key_control, &vars);
-		mlx_loop(vars.win->p_mlx);
+		//mlx_loop(vars.win->p_mlx);
 		free(vars.win);
 		free(vars.plyr);
 		free(vars.tile);
-		//free(game);
+		free(vars.game);
 	}
 	return (0);
 }
