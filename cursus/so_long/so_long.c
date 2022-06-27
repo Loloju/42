@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: odemirel <odemirel@student.42kocaeli.com.t +#+  +:+       +#+        */
+/*   By: odemirel <odemirel@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 10:26:20 by odemirel          #+#    #+#             */
-/*   Updated: 2022/06/21 16:05:32 by odemirel         ###   ########.fr       */
+/*   Updated: 2022/06/27 15:21:16 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ t_window	*mlx_instance_init(char **av, t_vars *v)
 	win = (t_window *) malloc(sizeof(t_window));
 	win->x_size = v->game->m_x_size * IMG;
 	win->y_size = v->game->m_y_size * IMG;
-	printf("%d x %d", win->x_size, win->y_size);
 	win->title = av[1];
 	win->p_mlx = mlx_init();
 	if (win->p_mlx != 0)
@@ -117,28 +116,25 @@ static int stlen(char *str)
 void	count_map_size(char *str, t_vars *v)
 {
 	int		fd;
-	// int		i;
+	int		i;
 	char	*a;
 	char	*b = "a";
 
 /* region *///map_size
-	printf("map_size");
-	fflush(stdout);
 	fd = open(str, O_RDONLY);
 	a = get_line(fd);
 	v->game->m_x_size = stlen(a);
 	v->game->m_y_size = 1;
-	while (b)
+	while (*b)
 	{
 		b = get_line(fd);
 		v->game->m_y_size++;
 	}
 	close(fd);
 /*end region*/
-	v->game->map = (char **) malloc(sizeof(char *) * v->game->m_y_size);
+	v->game->map = (char **) malloc(sizeof(char *) * (v->game->m_y_size + 1));
 /* region */ 
 	// assign_map (a null geliyor)
-	/* printf("map_assign");
 	fd = open(str, O_RDONLY);
 	i = 0;
 	while (i <= v->game->m_y_size)
@@ -148,17 +144,10 @@ void	count_map_size(char *str, t_vars *v)
 		{
 			v->game->map[i] = a;
 			write(1, v->game->map[i], stlen(v->game->map[i]));
-			write(1,"a",1);
 			i++;
 		}
-		else
-		{
-			printf("map error x size differ..");
-			exit(1);
-		}
-		i++;
 	}
-	close(fd); */
+	close(fd);
 }
 /*end region*/
 
@@ -181,7 +170,6 @@ int	main(int ac, char **av)
 
 	if (ac > 1)
 	{
-		printf("%s\n", av[1]);
 		vars.game = (t_game *) malloc(sizeof(t_game));
 		count_map_size(av[1], &vars);
 		vars.win = mlx_instance_init(av, &vars);

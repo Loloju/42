@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_line.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: odemirel <odemirel@student.42kocaeli.com.t +#+  +:+       +#+        */
+/*   By: odemirel <odemirel@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 10:42:32 by odemirel          #+#    #+#             */
-/*   Updated: 2022/06/21 16:22:06 by odemirel         ###   ########.fr       */
+/*   Updated: 2022/06/27 14:55:45 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-char	*get_line(int fd, int *flag)
+char	*get_line(int fd)
 {
 	char	*str;
 	char	*buff;
@@ -24,30 +24,28 @@ char	*get_line(int fd, int *flag)
 	bytes = 1;
 	buff = malloc(sizeof(char) * 2);
 	*buff = 0;
-	str = malloc(1);
+	str = malloc(2);
 	*str = 0;
 	while (bytes && !ft_strchr(buff, '\n'))
 	{
 		bytes = read(fd, buff, 1);
 		str = ft_strjoin(str, buff);
 	}
-	if (bytes == 0)
-		*flag = 1;
 	free (buff);
 	return (str);
 }
 
-int main ()
+/* int	main( void )
 {
-	int fd = open("maps/deneme.ber",O_RDONLY);
-	char *str = 0;
-	int a;
+	int		fd;
+	char	*str;
 
-	a = 0;
-	while (a)
+	str = "1";
+	fd = open("maps/deneme.ber", O_RDONLY);
+	while (str)
 	{
-		str = get_line(fd, &a);
+		str = get_line(fd);
 		printf("%s", str);
 	}
 	return (0);
-}
+} */

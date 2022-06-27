@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: odemirel <odemirel@student.42kocaeli.com.t +#+  +:+       +#+         #
+#    By: odemirel <odemirel@student.42kocaeli.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/25 10:16:38 by odemirel          #+#    #+#              #
-#    Updated: 2022/06/21 15:36:18 by odemirel         ###   ########.fr        #
+#    Updated: 2022/06/27 10:36:12 by odemirel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
