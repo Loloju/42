@@ -6,7 +6,7 @@
 /*   By: odemirel <odemirel@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 10:21:32 by odemirel          #+#    #+#             */
-/*   Updated: 2022/06/27 10:54:17 by odemirel         ###   ########.fr       */
+/*   Updated: 2022/07/01 09:40:23 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # define WLL "tiles/wall.xpm"
 # define PLR "tiles/plyr.xpm"
 # define EXT "tiles/exit.xpm"
+# define MSS "tiles/missing.xpm"
 
 typedef struct window{
 	int		x_size;
@@ -61,6 +62,8 @@ typedef struct tiles
 	void	*wall;
 	void	*coin;
 	void	*exit;
+	void	*notxt;
+	void	*plyr;
 }	t_tiles;
 
 typedef struct vars
