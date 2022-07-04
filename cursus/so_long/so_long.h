@@ -6,7 +6,7 @@
 /*   By: odemirel <odemirel@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 10:21:32 by odemirel          #+#    #+#             */
-/*   Updated: 2022/07/01 09:40:23 by odemirel         ###   ########.fr       */
+/*   Updated: 2022/07/04 13:39:52 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,12 @@
 # define ESC 53
 # define GND "tiles/grass.xpm"
 # define WLL "tiles/wall.xpm"
-# define PLR "tiles/plyr.xpm"
+# define PLRR "tiles/plyr.xpm"
+# define PLRL "tiles/plyrl.xpm"
 # define EXT "tiles/exit.xpm"
+# define EXTC "tiles/exitclose.xpm"
 # define MSS "tiles/missing.xpm"
+# define CN "tiles/coin.xpm"
 
 typedef struct window{
 	int		x_size;
@@ -51,6 +54,7 @@ typedef struct game
 	char	**map;
 	int		m_x_size;
 	int		m_y_size;
+	int		cn;
 }	t_game;
 
 typedef struct tiles

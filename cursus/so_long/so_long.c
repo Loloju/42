@@ -6,7 +6,7 @@
 /*   By: odemirel <odemirel@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 10:26:20 by odemirel          #+#    #+#             */
-/*   Updated: 2022/07/01 14:51:14 by odemirel         ###   ########.fr       */
+/*   Updated: 2022/07/04 17:22:16 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	draw_map(t_vars *v)
 	int	y;
 	int	x;
 
+	if (v->game->cn == v->plyr->ccnt)
+		v->tile->exit = mlx_xpm_file_to_image(v->win->p_mlx, EXT, &v->tile->wdt, &v->tile->hgt);
 	y = 0;
 	while (y < v->game->m_y_size - 1)
 	{
@@ -40,6 +42,11 @@ void	draw_map(t_vars *v)
 				mlx_put_image_to_window(v->win->p_mlx, v->win->p_win, v->tile->gnd, x * IMG, y * IMG);
 				mlx_put_image_to_window(v->win->p_mlx, v->win->p_win, v->tile->coin, x * IMG, y * IMG);
 			}
+			else if (v->game->map[y][x] == 'E')
+			{
+				mlx_put_image_to_window(v->win->p_mlx, v->win->p_win, v->tile->wall, x * IMG, y * IMG);
+				mlx_put_image_to_window(v->win->p_mlx, v->win->p_win, v->tile->exit, x * IMG, y * IMG);
+			}
 			else
 				mlx_put_image_to_window(v->win->p_mlx, v->win->p_win, v->tile->notxt, x * IMG, y * IMG);
 			x++;
@@ -48,7 +55,7 @@ void	draw_map(t_vars *v)
 	}
 }
 
-int	check_ahead(char *way)
+int	check_ahead(char *way, int ccnt, int cgoal)
 {
 	if (*way == '1')
 		return (0);
@@ -56,14 +63,20 @@ int	check_ahead(char *way)
 		return (2);
 	if (*way == '0')
 		return (1);
+	if (*way == 'E')
+	{
+		if (ccnt == cgoal)
+			return (1);
+		return (0);
+	}
 	return (-1);
 }
 
-void	move_player(t_vars *v, char *way)
+int	move_player(t_vars *v, char *way)
 {
 	int	ca;
 
-	ca = check_ahead(way);
+	ca = check_ahead(way, v->plyr->ccnt, v->game->cn);
 	if (ca != 0)
 	{
 		if (ca == 2)
@@ -71,6 +84,7 @@ void	move_player(t_vars *v, char *way)
 		v->game->map[v->plyr->py][v->plyr->px] = '0';
 		*way = 'P';
 	}
+	return (ca);
 }
 
 int	key_control(int keycode, t_vars *v)
@@ -88,6 +102,7 @@ int	key_control(int keycode, t_vars *v)
 	else if (keycode == A)
 	{
 		move_player(v, &v->game->map[v->plyr->py][v->plyr->px - 1]);
+		v->tile->plyr = mlx_xpm_file_to_image(v->win->p_mlx, PLRL, &v->tile->wdt, &v->tile->hgt);
 		v->plyr->mcnt++;
 	}
 	else if (keycode == S)
@@ -98,8 +113,19 @@ int	key_control(int keycode, t_vars *v)
 	else if (keycode == D)
 	{
 		move_player(v, &v->game->map[v->plyr->py][v->plyr->px + 1]);
+		v->tile->plyr = mlx_xpm_file_to_image(v->win->p_mlx, PLRR, &v->tile->wdt, &v->tile->hgt);
 		v->plyr->mcnt++;
 	}
+	printf("ccnt: %d - cn: %d\n", v->plyr->ccnt, v->game->cn);
+	printf("player coords: %d, %d\n", v->plyr->px, v->plyr->py);
+	int i = 0;
+	while (i < v->game->m_y_size - 1)
+	{
+		printf("%s", v->game->map[i]);
+		i++;
+	}
+	printf("\n");
+	fflush(stdout);
 	draw_map(v);
 	return (1);
 }
@@ -132,9 +158,10 @@ t_tiles	*tiles_init(t_window *win)
 	t = (t_tiles *) malloc(sizeof(t_tiles));
 	t->gnd = mlx_xpm_file_to_image(win->p_mlx, GND, &t->wdt, &t->hgt);
 	t->wall = mlx_xpm_file_to_image(win->p_mlx, WLL, &t->wdt, &t->hgt);
-	t->exit = mlx_xpm_file_to_image(win->p_mlx, EXT, &t->wdt, &t->hgt);
+	t->exit = mlx_xpm_file_to_image(win->p_mlx, EXTC, &t->wdt, &t->hgt);
 	t->notxt = mlx_xpm_file_to_image(win->p_mlx, MSS, &t->wdt, &t->hgt);
-	t->plyr = mlx_xpm_file_to_image(win->p_mlx, PLR, &t->wdt, &t->hgt);
+	t->plyr = mlx_xpm_file_to_image(win->p_mlx, PLRR, &t->wdt, &t->hgt);
+	t->coin = mlx_xpm_file_to_image(win->p_mlx, CN, &t->wdt, &t->hgt);
 	return (t);
 }
 
@@ -155,6 +182,7 @@ void	count_map_size(char *str, t_vars *v)
 {
 	int		fd;
 	int		i;
+	int		j;
 	char	*a;
 	char	*b;
 
@@ -179,7 +207,14 @@ void	count_map_size(char *str, t_vars *v)
 	while (i < v->game->m_y_size)
 	{
 		a = get_line(fd);
-		if (stlen(a) == v->game->m_x_size)
+		j = 0;
+		while (a[j] != 0)
+		{
+			if (a[j] == 'C')
+				v->game->cn++;
+			j++;
+		}
+		if (stlen(a) == v->game->m_x_size && a != 0)
 		{
 			v->game->map[i] = a;
 			write(1, v->game->map[i], stlen(v->game->map[i]));
@@ -210,6 +245,7 @@ int	main(int ac, char **av)
 	if (ac > 1)
 	{
 		vars.game = (t_game *) malloc(sizeof(t_game));
+		vars.game->cn = 0;
 		count_map_size(av[1], &vars);
 		mlx_instance_init(av, &vars);
 		if (vars.win == 0)

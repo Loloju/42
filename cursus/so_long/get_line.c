@@ -6,7 +6,7 @@
 /*   By: odemirel <odemirel@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 10:42:32 by odemirel          #+#    #+#             */
-/*   Updated: 2022/06/27 14:55:45 by odemirel         ###   ########.fr       */
+/*   Updated: 2022/07/04 13:25:23 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ char	*get_line(int fd)
 	while (bytes && !ft_strchr(buff, '\n'))
 	{
 		bytes = read(fd, buff, 1);
+		buff[1] = 0;
 		str = ft_strjoin(str, buff);
 	}
 	free (buff);
