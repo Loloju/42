@@ -6,7 +6,7 @@
 /*   By: odemirel <odemirel@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 10:21:32 by odemirel          #+#    #+#             */
-/*   Updated: 2022/07/04 13:39:52 by odemirel         ###   ########.fr       */
+/*   Updated: 2022/08/01 13:55:24 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 # define SO_LONG_H
 
 # include "MiniLibX/mlx.h"
-# include "get_next_line/get_next_line.h"
+# include "libft/libft.h"
 
+# define KEY_PRESS_EVNT 2
+# define KEY_PRESS_MSK 1L<<0
 # define IMG 64
 # define W 13
 # define A 0
@@ -79,4 +81,7 @@ typedef struct vars
 }	t_vars;
 
 char	*get_line(int fd);
+void	mlx_instance_init(char **av, t_vars *v);
+t_tiles	*tiles_init(t_window *win);
+t_plyr	*player_init( void );
 #endif

@@ -6,12 +6,25 @@
 /*   By: odemirel <odemirel@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 10:26:20 by odemirel          #+#    #+#             */
-/*   Updated: 2022/07/04 17:22:16 by odemirel         ###   ########.fr       */
+/*   Updated: 2022/08/01 13:58:59 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+#include <fcntl.h>
 #include <stdio.h>
+
+int	exit_game(t_vars *v)
+{
+	printf("\n");
+	mlx_destroy_window(v->win->p_mlx, v->win->p_win);
+	free(v->win);
+	free(v->plyr);
+	free(v->tile);
+	free(v->game);
+	exit(1);
+	return (0);
+}
 
 void	draw_map(t_vars *v)
 {
@@ -66,7 +79,7 @@ int	check_ahead(char *way, int ccnt, int cgoal)
 	if (*way == 'E')
 	{
 		if (ccnt == cgoal)
-			return (1);
+			return (3);
 		return (0);
 	}
 	return (-1);
@@ -83,6 +96,12 @@ int	move_player(t_vars *v, char *way)
 			v->plyr->ccnt++;
 		v->game->map[v->plyr->py][v->plyr->px] = '0';
 		*way = 'P';
+		v->plyr->mcnt++;
+		if (ca == 3)
+		{
+			draw_map(v);
+			exit_game(v);
+		}
 	}
 	return (ca);
 }
@@ -91,78 +110,29 @@ int	key_control(int keycode, t_vars *v)
 {
 	if (keycode == ESC)
 	{
-		mlx_destroy_window(v->win->p_mlx, v->win->p_win);
-		exit(1);
+		//reformat
+		exit_game(v);
 	}
 	else if (keycode == W)
-	{
 		move_player(v, &v->game->map[v->plyr->py - 1][v->plyr->px]);
-		v->plyr->mcnt++;
-	}
 	else if (keycode == A)
 	{
 		move_player(v, &v->game->map[v->plyr->py][v->plyr->px - 1]);
-		v->tile->plyr = mlx_xpm_file_to_image(v->win->p_mlx, PLRL, &v->tile->wdt, &v->tile->hgt);
-		v->plyr->mcnt++;
+		v->tile->plyr = mlx_xpm_file_to_image(v->win->p_mlx, PLRL,
+				&v->tile->wdt, &v->tile->hgt);
 	}
 	else if (keycode == S)
-	{
 		move_player(v, &v->game->map[v->plyr->py + 1][v->plyr->px]);
-		v->plyr->mcnt++;
-	}
 	else if (keycode == D)
 	{
 		move_player(v, &v->game->map[v->plyr->py][v->plyr->px + 1]);
-		v->tile->plyr = mlx_xpm_file_to_image(v->win->p_mlx, PLRR, &v->tile->wdt, &v->tile->hgt);
-		v->plyr->mcnt++;
+		v->tile->plyr = mlx_xpm_file_to_image(v->win->p_mlx,
+				PLRR, &v->tile->wdt, &v->tile->hgt);
 	}
-	printf("ccnt: %d - cn: %d\n", v->plyr->ccnt, v->game->cn);
-	printf("player coords: %d, %d\n", v->plyr->px, v->plyr->py);
-	int i = 0;
-	while (i < v->game->m_y_size - 1)
-	{
-		printf("%s", v->game->map[i]);
-		i++;
-	}
-	printf("\n");
+	printf("\rMove Count: %d", v->plyr->mcnt);
 	fflush(stdout);
 	draw_map(v);
 	return (1);
-}
-
-void	mlx_instance_init(char **av, t_vars *v)
-{
-	t_window	*win;
-
-	win = (t_window *) malloc(sizeof(t_window));
-	win->x_size = (v->game->m_x_size - 1) * IMG;
-	win->y_size = (v->game->m_y_size - 1) * IMG;
-	win->title = av[1];
-	win->p_mlx = mlx_init();
-	if (win->p_mlx != 0)
-	{
-		win->p_win = mlx_new_window(win->p_mlx, win->x_size,
-				win->y_size, win->title);
-	}
-	else
-	{
-		return ;
-	}
-	v->win = win;
-}
-
-t_tiles	*tiles_init(t_window *win)
-{
-	t_tiles	*t;
-
-	t = (t_tiles *) malloc(sizeof(t_tiles));
-	t->gnd = mlx_xpm_file_to_image(win->p_mlx, GND, &t->wdt, &t->hgt);
-	t->wall = mlx_xpm_file_to_image(win->p_mlx, WLL, &t->wdt, &t->hgt);
-	t->exit = mlx_xpm_file_to_image(win->p_mlx, EXTC, &t->wdt, &t->hgt);
-	t->notxt = mlx_xpm_file_to_image(win->p_mlx, MSS, &t->wdt, &t->hgt);
-	t->plyr = mlx_xpm_file_to_image(win->p_mlx, PLRR, &t->wdt, &t->hgt);
-	t->coin = mlx_xpm_file_to_image(win->p_mlx, CN, &t->wdt, &t->hgt);
-	return (t);
 }
 
 /*region*///count_map_size kullanıyor
@@ -217,26 +187,13 @@ void	count_map_size(char *str, t_vars *v)
 		if (stlen(a) == v->game->m_x_size && a != 0)
 		{
 			v->game->map[i] = a;
-			write(1, v->game->map[i], stlen(v->game->map[i]));
+			//write(1, v->game->map[i], stlen(v->game->map[i]));
 		}
 		i++;
 	}
 	close(fd);
 }
 /*end region*/
-
-t_plyr *player_init( void )
-{
-	t_plyr	*plyr;
-
-	plyr = (t_plyr *) malloc(sizeof(t_plyr));
-	plyr->ccnt = 0;
-	plyr->mcnt = 0;
-	plyr->hp = 0;
-	plyr->px = 0;
-	plyr->py = 0;
-	return (plyr);
-}
 
 int	main(int ac, char **av)
 {
@@ -253,12 +210,11 @@ int	main(int ac, char **av)
 		vars.plyr = player_init();
 		vars.tile = tiles_init(vars.win);
 		draw_map(&vars);
-		mlx_key_hook(vars.win->p_win, key_control, &vars);
+		mlx_hook(vars.win->p_win, 17, 0, exit_game, &vars);
+		//mlx_key_hook(vars.win->p_win, key_control, &vars);
+		mlx_hook(vars.win->p_win, KEY_PRESS_EVNT, KEY_PRESS_MSK,
+			key_control, &vars);
 		mlx_loop(vars.win->p_mlx);
-		free(vars.win);
-		free(vars.plyr);
-		free(vars.tile);
-		free(vars.game);
 	}
 	return (0);
 }
