@@ -6,7 +6,7 @@
 /*   By: odemirel <odemirel@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 10:21:32 by odemirel          #+#    #+#             */
-/*   Updated: 2022/08/01 13:55:24 by odemirel         ###   ########.fr       */
+/*   Updated: 2022/08/10 12:36:36 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 # define SO_LONG_H
 
 # include "MiniLibX/mlx.h"
-# include "libft/libft.h"
+# include "ft_printf/ft_printf.h"
+# include <fcntl.h>
 
 # define KEY_PRESS_EVNT 2
 # define KEY_PRESS_MSK 1L<<0
@@ -48,7 +49,6 @@ typedef struct player
 	int	py;
 	int	ccnt;
 	int	mcnt;
-	int	hp;
 }	t_plyr;
 
 typedef struct game
@@ -84,4 +84,8 @@ char	*get_line(int fd);
 void	mlx_instance_init(char **av, t_vars *v);
 t_tiles	*tiles_init(t_window *win);
 t_plyr	*player_init( void );
+void	draw_map(t_vars *v);
+void	count_map_size(char *str, t_vars *v);
+int		exit_game(t_vars *v);
+void	diagnose_map(t_vars *v, char *str);
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: odemirel <odemirel@student.42kocaeli.com.t +#+  +:+       +#+        */
+/*   By: odemirel <odemirel@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 15:42:40 by odemirel          #+#    #+#             */
-/*   Updated: 2022/05/18 18:15:28 by odemirel         ###   ########.fr       */
+/*   Updated: 2022/08/05 09:48:56 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

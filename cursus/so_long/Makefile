@@ -6,21 +6,22 @@
 #    By: odemirel <odemirel@student.42kocaeli.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/25 10:16:38 by odemirel          #+#    #+#              #
-#    Updated: 2022/07/27 09:29:30 by odemirel         ###   ########.fr        #
+#    Updated: 2022/08/10 12:39:08 by odemirel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
 MLX = MiniLibX/
-LIB = libft/
+LIB = ft_printf/
 FLAGS = -Wall -Werror -Wextra
 OPENGLFLAGS = -framework OpenGL -framework AppKit -L./minilibx -lmlx
+SRCS = srcs/* ft_printf/libftprintf.a
 
 all: $(NAME)
 
 $(NAME):
 	@make -C $(LIB)
-	@gcc $(FLAGS) $(OPENGLFLAGS) so_long.c init.c get_line.c libft/ft_strjoin.c libft/ft_strlen.c libft/ft_strchr.c so_long.h -g
+	@gcc $(FLAGS) $(OPENGLFLAGS) $(SRCS) so_long.h -g
 	@mv a.out so_long
 	@echo "\033[36;5m\tSo_long Compiled!\033[0m"
 
