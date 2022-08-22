@@ -6,7 +6,7 @@
 /*   By: odemirel <odemirel@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 15:38:31 by odemirel          #+#    #+#             */
-/*   Updated: 2022/08/05 16:11:16 by odemirel         ###   ########.fr       */
+/*   Updated: 2022/08/17 16:57:15 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ static void	check_ce(t_vars *v, int y, int x)
 	}
 	else
 	{
-		ft_printf("Haritada tanımlanmamış değer (\"%c\") var! x : %d , y : %d",
+		ft_error("");
+		ft_printf("Haritada tanımlanmamış değer (\"%c\") var! x : %d , y : %d\n",
 			v->game->map[y][x], x, y);
 		exit_game(v);
 	}
@@ -62,14 +63,14 @@ void	draw_map(t_vars *v)
 	int	y;
 	int	x;
 
-	if (v->game->cn == v->plyr->ccnt)
+	if (v->game->cn == 0)
 		v->tile->exit = mlx_xpm_file_to_image(v->win->p_mlx, EXT,
 				&v->tile->wdt, &v->tile->hgt);
 	y = 0;
-	while (y < v->game->m_y_size - 1)
+	while (y < v->game->m_y_size)
 	{
 		x = 0;
-		while (x < v->game->m_x_size - 1)
+		while (x < v->game->m_x_size)
 		{
 			check_01p(v, y, x);
 			x++;

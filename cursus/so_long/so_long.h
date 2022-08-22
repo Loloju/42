@@ -6,7 +6,7 @@
 /*   By: odemirel <odemirel@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 10:21:32 by odemirel          #+#    #+#             */
-/*   Updated: 2022/08/10 12:36:36 by odemirel         ###   ########.fr       */
+/*   Updated: 2022/08/17 17:02:47 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,22 @@
 # include "ft_printf/ft_printf.h"
 # include <fcntl.h>
 
-# define KEY_PRESS_EVNT 2
-# define KEY_PRESS_MSK 1L<<0
-# define IMG 64
-# define W 13
-# define A 0
-# define S 1
-# define D 2
-# define E 14
-# define ESC 53
-# define GND "tiles/grass.xpm"
-# define WLL "tiles/wall.xpm"
-# define PLRR "tiles/plyr.xpm"
-# define PLRL "tiles/plyrl.xpm"
-# define EXT "tiles/exit.xpm"
-# define EXTC "tiles/exitclose.xpm"
-# define MSS "tiles/missing.xpm"
-# define CN "tiles/coin.xpm"
+# define KEY_PRESS_EVNT	2
+# define IMG			64
+# define W				13
+# define A				0
+# define S				1
+# define D				2
+# define E				14
+# define ESC			53
+# define GND			"./tiles/grass.xpm"
+# define WLL			"./tiles/wall.xpm"
+# define PLRR			"./tiles/plyr.xpm"
+# define PLRL			"./tiles/plyrl.xpm"
+# define EXT			"./tiles/exit.xpm"
+# define EXTC			"./tiles/exitclose.xpm"
+# define MSS			"./tiles/missing.xpm"
+# define CN				"./tiles/coin.xpm"
 
 typedef struct window{
 	int		x_size;
@@ -47,7 +46,6 @@ typedef struct player
 {
 	int	px;
 	int	py;
-	int	ccnt;
 	int	mcnt;
 }	t_plyr;
 
@@ -63,12 +61,10 @@ typedef struct tiles
 {
 	int		hgt;
 	int		wdt;
-	void	*bg;
 	void	*gnd;
 	void	*wall;
 	void	*coin;
 	void	*exit;
-	void	*notxt;
 	void	*plyr;
 }	t_tiles;
 
@@ -84,8 +80,10 @@ char	*get_line(int fd);
 void	mlx_instance_init(char **av, t_vars *v);
 t_tiles	*tiles_init(t_window *win);
 t_plyr	*player_init( void );
+t_game	*game_init(void);
 void	draw_map(t_vars *v);
 void	count_map_size(char *str, t_vars *v);
 int		exit_game(t_vars *v);
 void	diagnose_map(t_vars *v, char *str);
+void	ft_error(char *str);
 #endif

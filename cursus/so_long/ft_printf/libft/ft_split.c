@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: odemirel <odemirel@student.42kocaeli.com.t +#+  +:+       +#+        */
+/*   By: odemirel <odemirel@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 14:11:50 by odemirel          #+#    #+#             */
-/*   Updated: 2022/02/22 15:31:46 by odemirel         ###   ########.fr       */
+/*   Updated: 2022/08/17 17:10:47 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

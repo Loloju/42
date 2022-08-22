@@ -6,7 +6,7 @@
 /*   By: odemirel <odemirel@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 10:26:20 by odemirel          #+#    #+#             */
-/*   Updated: 2022/08/10 12:55:33 by odemirel         ###   ########.fr       */
+/*   Updated: 2022/08/17 17:11:07 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	exit_game(t_vars *v)
 	return (0);
 }
 
-int	check_ahead(char *way, int ccnt, int cgoal)
+int	check_ahead(char *way, int cgoal)
 {
 	if (*way == '1')
 		return (0);
@@ -43,7 +43,7 @@ int	check_ahead(char *way, int ccnt, int cgoal)
 		return (1);
 	if (*way == 'E')
 	{
-		if (ccnt == cgoal)
+		if (cgoal == 0)
 			return (3);
 		return (0);
 	}
@@ -54,11 +54,11 @@ int	move_player(t_vars *v, char *way)
 {
 	int	ca;
 
-	ca = check_ahead(way, v->plyr->ccnt, v->game->cn);
+	ca = check_ahead(way, v->game->cn);
 	if (ca != 0)
 	{
 		if (ca == 2)
-			v->plyr->ccnt++;
+			v->game->cn--;
 		v->game->map[v->plyr->py][v->plyr->px] = '0';
 		*way = 'P';
 		v->plyr->mcnt++;
@@ -101,14 +101,14 @@ int	key_control(int keycode, t_vars *v)
 int	main(int ac, char **av)
 {
 	t_vars		vars;
-
 	if (ac == 2)
 	{
-		vars.game = (t_game *) malloc(sizeof(t_game));
-		if (!vars.game)
-			return (0);
+		vars.game = game_init();
 		vars.game->cn = 0;
+		vars.game->m_x_size = 0;
+		vars.game->m_y_size = 0;
 		count_map_size(av[1], &vars);
+
 		mlx_instance_init(av, &vars);
 		if (vars.win == 0)
 			return (-1);
@@ -117,7 +117,7 @@ int	main(int ac, char **av)
 		diagnose_map(&vars, av[1]);
 		draw_map(&vars);
 		mlx_hook(vars.win->p_win, 17, 0, exit_game, &vars);
-		mlx_hook(vars.win->p_win, KEY_PRESS_EVNT, KEY_PRESS_MSK,
+		mlx_hook(vars.win->p_win, KEY_PRESS_EVNT, (1L << 0),
 			key_control, &vars);
 		mlx_loop(vars.win->p_mlx);
 	}

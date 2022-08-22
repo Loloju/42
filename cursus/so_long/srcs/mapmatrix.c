@@ -6,58 +6,70 @@
 /*   By: odemirel <odemirel@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 15:13:38 by odemirel          #+#    #+#             */
-/*   Updated: 2022/08/10 12:26:47 by odemirel         ###   ########.fr       */
+/*   Updated: 2022/08/22 10:24:49 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
+#include "../get_next_line.h"
 
-static void	put_matrix(char *str, t_vars *v)
+static void	set_map_size(t_vars *v)
 {
-	int		fd;
-	int		i;
-	int		j;
-	char	*a;
+	char	**map;
 
-	fd = open(str, O_RDONLY);
-	i = 0;
-	while (i < v->game->m_y_size)
-	{
-		a = get_line(fd);
-		j = 0;
-		while (a[j] != 0)
-		{
-			if (a[j] == 'C')
-				v->game->cn++;
-			j++;
-		}
-		if ((int) ft_strlen(a) == v->game->m_x_size && a != 0)
-		{
-			v->game->map[i] = a;
-		}
-		i++;
-	}
-	close(fd);
+	map = v->game->map;
+	v->game->m_x_size = ft_strlen(map[v->game->m_y_size]);
+	while (map[v->game->m_y_size])
+		v->game->m_y_size++;
 }
 
 void	count_map_size(char *str, t_vars *v)
 {
 	int		fd;
+	int		readed;
 	char	*a;
+	char	*f;
 
+	f = malloc(sizeof(char) * 0);
+	*f = 0;
+	a = malloc(sizeof(char) * 2);
+	a[1] = 0;
 	fd = open(str, O_RDONLY);
-	a = get_line(fd);
-	v->game->m_x_size = (int) ft_strlen(a);
-	v->game->m_y_size = 1;
-	while (*a)
+	readed = -2;
+	while (readed > 0 || readed == -2)
 	{
-		free(a);
-		a = get_line(fd);
-		v->game->m_y_size++;
+		readed = read(fd, a, 1);
+		f = ft_strjoin(f, a);
 	}
 	free(a);
+	v->game->map = ft_split(f, '\n');
+	free(f);
 	close(fd);
-	v->game->map = (char **) malloc(sizeof(char *) * (v->game->m_y_size + 1));
-	v->game->map[v->game->m_y_size] = 0;
-	put_matrix(str, v);
+	set_map_size(v);
 }
+/*
+void	count_map_size(char *str, t_vars *v)
+{
+	int		fd;
+	char	*a;
+	char	*f;
+
+	fd = open(str, O_RDONLY);
+	a = malloc(sizeof(char));
+	f = malloc(sizeof(char));
+	while (a)
+	{
+		a = get_next_line(fd);
+		ft_printf("%p\n", a);
+		if (a != 0)
+			f = ft_strjoin(f, a);
+		free(a);
+	}
+	close(fd);
+	free(a);
+
+	v->game->map = ft_split(f, '\n');
+	free(f);
+	set_map_size(v);
+}
+*/

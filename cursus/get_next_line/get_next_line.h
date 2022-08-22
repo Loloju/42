@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: odemirel <odemirel@student.42kocaeli.com.t +#+  +:+       +#+        */
+/*   By: odemirel <odemirel@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 16:45:22 by odemirel          #+#    #+#             */
-/*   Updated: 2022/03/03 15:58:29 by odemirel         ###   ########.fr       */
+/*   Updated: 2022/08/12 12:15:18 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 size_t	ft_strlen(const char *s);
 
 char	*get_next_line(int fd);
-char	*ft_strjoin(char *s1, const char *s2);
+char	*ft_strjoin(char *s1, char *s2);
 char	*buff_rest(char *str);
 char	*ft_strchr(const char *s, int c);
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: odemirel <odemirel@student.42kocaeli.com.t +#+  +:+       +#+        */
+/*   By: odemirel <odemirel@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 14:20:50 by fcil              #+#    #+#             */
-/*   Updated: 2022/03/03 16:00:23 by odemirel         ###   ########.fr       */
+/*   Updated: 2022/08/22 10:00:31 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,14 +105,17 @@ char	*get_next_line(int fd)
 	return (str);
 }
 
-//main function
-// int	main()
-// {
-// 	int fd = open("asd.txt", O_RDONLY);
-//  	char  *str;
+/* int	main()
+{
+	int fd = open("asd.txt", O_RDONLY);
+ 	char  *str;
 
-// 	for (int i = 0; i < 10; i++) {
-//   		str = get_next_line(fd);
-//  		write(1, str, ft_strlen(str));
-// 	}
-// }
+	for (int i = 0; i < 10; i++) {
+  		str = get_next_line(fd);
+		write(1, str, ft_strlen(str));
+		free(str);
+	}
+	while (1)
+	{
+	}
+} */

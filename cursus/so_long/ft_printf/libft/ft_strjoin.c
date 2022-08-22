@@ -6,7 +6,7 @@
 /*   By: odemirel <odemirel@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 14:14:48 by odemirel          #+#    #+#             */
-/*   Updated: 2022/08/10 09:55:22 by odemirel         ###   ########.fr       */
+/*   Updated: 2022/08/12 13:13:41 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	unsigned int	j;
 	char			*s3;
 
-	if (!s2)
+	if (!s1 || !s2)
 		return (NULL);
 	s3 = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
 	if (!s3)
