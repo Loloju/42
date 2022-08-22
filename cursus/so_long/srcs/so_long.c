@@ -6,7 +6,7 @@
 /*   By: odemirel <odemirel@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 10:26:20 by odemirel          #+#    #+#             */
-/*   Updated: 2022/08/17 17:11:07 by odemirel         ###   ########.fr       */
+/*   Updated: 2022/08/22 11:35:31 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ int	key_control(int keycode, t_vars *v)
 int	main(int ac, char **av)
 {
 	t_vars		vars;
+
 	if (ac == 2)
 	{
 		vars.game = game_init();
@@ -108,7 +109,6 @@ int	main(int ac, char **av)
 		vars.game->m_x_size = 0;
 		vars.game->m_y_size = 0;
 		count_map_size(av[1], &vars);
-
 		mlx_instance_init(av, &vars);
 		if (vars.win == 0)
 			return (-1);

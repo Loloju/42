@@ -6,12 +6,11 @@
 /*   By: odemirel <odemirel@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 15:13:38 by odemirel          #+#    #+#             */
-/*   Updated: 2022/08/22 10:24:49 by odemirel         ###   ########.fr       */
+/*   Updated: 2022/08/22 11:08:22 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
-#include "../get_next_line.h"
 
 static void	set_map_size(t_vars *v)
 {
