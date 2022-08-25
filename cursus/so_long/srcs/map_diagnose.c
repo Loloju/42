@@ -6,7 +6,7 @@
 /*   By: odemirel <odemirel@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 16:07:12 by odemirel          #+#    #+#             */
-/*   Updated: 2022/08/24 16:21:31 by odemirel         ###   ########.fr       */
+/*   Updated: 2022/08/25 12:22:38 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	set_flag(t_vars *v, int flag, char element)
 		v->game->cn++;
 	if (flag == 1)
 	{
-		if (element != 'C')
+		if (element == 'P')
 		{
 			ft_error("");
 			ft_printf("Haritada birden fazla %c var!", element);
