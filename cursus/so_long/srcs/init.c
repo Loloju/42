@@ -6,7 +6,7 @@
 /*   By: odemirel <odemirel@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 09:30:34 by odemirel          #+#    #+#             */
-/*   Updated: 2022/08/17 17:04:54 by odemirel         ###   ########.fr       */
+/*   Updated: 2022/08/24 10:28:00 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ t_game	*game_init( void )
 	game = (t_game *) malloc(sizeof(t_game));
 	game->cn = 0;
 	game->m_x_size = 0;
-	game->m_x_size = 0;
+	game->m_y_size = 0;
 	game->map = NULL;
 	return (game);
 }

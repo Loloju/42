@@ -6,7 +6,7 @@
 /*   By: odemirel <odemirel@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 15:38:31 by odemirel          #+#    #+#             */
-/*   Updated: 2022/08/17 16:57:15 by odemirel         ###   ########.fr       */
+/*   Updated: 2022/08/24 16:32:44 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,15 @@ static void	check_01p(t_vars *v, int y, int x)
 
 void	draw_map(t_vars *v)
 {
-	int	y;
-	int	x;
+	int			y;
+	int			x;
+	static int	f = 0;
 
-	if (v->game->cn == 0)
+	if (v->game->cn == 0 && f)
 		v->tile->exit = mlx_xpm_file_to_image(v->win->p_mlx, EXT,
 				&v->tile->wdt, &v->tile->hgt);
+	else
+		f = 1;
 	y = 0;
 	while (y < v->game->m_y_size)
 	{

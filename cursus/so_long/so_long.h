@@ -6,7 +6,7 @@
 /*   By: odemirel <odemirel@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 10:21:32 by odemirel          #+#    #+#             */
-/*   Updated: 2022/08/22 11:12:37 by odemirel         ###   ########.fr       */
+/*   Updated: 2022/08/25 10:23:10 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,14 +76,18 @@ typedef struct vars
 	t_game		*game;
 }	t_vars;
 
-char	*get_line(int fd);
-void	mlx_instance_init(char **av, t_vars *v);
 t_tiles	*tiles_init(t_window *win);
 t_plyr	*player_init( void );
 t_game	*game_init(void);
+
+char	*get_line(int fd);
+
+int		exit_game(t_vars *v);
+int		diag_extension(char *str);
+
+void	mlx_instance_init(char **av, t_vars *v);
 void	draw_map(t_vars *v);
 void	count_map_size(char *str, t_vars *v);
-int		exit_game(t_vars *v);
-void	diagnose_map(t_vars *v, char *str);
+void	diagnose_map(t_vars *v);
 void	ft_error(char *str);
 #endif

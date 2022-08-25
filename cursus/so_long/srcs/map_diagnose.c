@@ -6,7 +6,7 @@
 /*   By: odemirel <odemirel@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 16:07:12 by odemirel          #+#    #+#             */
-/*   Updated: 2022/08/22 10:35:28 by odemirel         ###   ########.fr       */
+/*   Updated: 2022/08/24 16:21:31 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_error(char *str)
 {
-	ft_printf("Error:\n\t%s", str);
+	ft_printf("Hata:\n\t%s", str);
 }
 
 static int	set_flag(t_vars *v, int flag, char element)
@@ -33,7 +33,7 @@ static int	set_flag(t_vars *v, int flag, char element)
 	return (1);
 }
 
-static int	diag_extension(char *str)
+int	diag_extension(char *str)
 {
 	int	size;
 
@@ -77,26 +77,26 @@ static int	diagnose(t_vars *v, char element)
 	return (flag);
 }
 
-void	diagnose_map(t_vars *v, char *str)
+void	diagnose_map(t_vars *v)
 {
+	int	f;
+
+	f = 0;
 	if (!diagnose(v, 'C'))
 	{
 		ft_error("Haritada coin yok.\n");
-		exit_game(v);
+		f = 1;
 	}
 	if (!diagnose(v, 'P'))
 	{
 		ft_error("Haritada player yok.\n");
-		exit_game(v);
+		f = 1;
 	}
 	if (!diagnose(v, 'E'))
 	{
 		ft_error("Haritada çıkış yok.\n");
-		exit_game(v);
+		f = 1;
 	}
-	if (!diag_extension(str))
-	{
-		ft_error("Uzantı uyumsuz!");
+	if (f)
 		exit_game(v);
-	}
 }

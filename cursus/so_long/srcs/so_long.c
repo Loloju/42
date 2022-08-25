@@ -6,7 +6,7 @@
 /*   By: odemirel <odemirel@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 10:26:20 by odemirel          #+#    #+#             */
-/*   Updated: 2022/08/22 11:35:31 by odemirel         ###   ########.fr       */
+/*   Updated: 2022/08/25 10:22:46 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int	key_control(int keycode, t_vars *v)
 		v->tile->plyr = mlx_xpm_file_to_image(v->win->p_mlx,
 				PLRR, &v->tile->wdt, &v->tile->hgt);
 	}
-	ft_printf("\rMove Count: %d", v->plyr->mcnt);
+	ft_printf("\rMove Count: \033[33;1;3m%d\033[0m", v->plyr->mcnt);
 	draw_map(v);
 	return (1);
 }
@@ -104,18 +104,20 @@ int	main(int ac, char **av)
 
 	if (ac == 2)
 	{
+		if (!diag_extension(av[1]))
+		{
+			ft_error("Uzantı uyumsuz!");
+			exit(1);
+		}
 		vars.game = game_init();
-		vars.game->cn = 0;
-		vars.game->m_x_size = 0;
-		vars.game->m_y_size = 0;
 		count_map_size(av[1], &vars);
 		mlx_instance_init(av, &vars);
 		if (vars.win == 0)
 			return (-1);
 		vars.plyr = player_init();
 		vars.tile = tiles_init(vars.win);
-		diagnose_map(&vars, av[1]);
 		draw_map(&vars);
+		diagnose_map(&vars);
 		mlx_hook(vars.win->p_win, 17, 0, exit_game, &vars);
 		mlx_hook(vars.win->p_win, KEY_PRESS_EVNT, (1L << 0),
 			key_control, &vars);
