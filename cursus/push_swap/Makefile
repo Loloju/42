@@ -6,18 +6,20 @@
 #    By: odemirel <odemirel@student.42kocaeli.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/15 12:06:55 by odemirel          #+#    #+#              #
-#    Updated: 2022/09/15 12:25:44 by odemirel         ###   ########.fr        #
+#    Updated: 2022/10/19 12:11:45 by odemirel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
-SRC = *.c
+SRCS = $(shell find . -type f -name "*.c")
 FLAGS = -Wall -Werror -Wextra
+OBJS = $(SRCS:%.c=%.o)
+CC = gcc
 
 all: $(NAME)
 
-$(NAME):
-	@gcc $(FLAGS) $(SRC) -I. -o $(NAME)
+$(NAME): $(OBJS)
+	@gcc $(FLAGS) $(OBJS) -I. -o $(NAME)
 	@echo "\033[32:1mPushSwap Compiled!"
 
 re: fclean all
