@@ -1,0 +1,3 @@
+# Push_Swap
+## Because swap_push isn't as natural...  
+![ezgif com-gif-maker](https://user-images.githubusercontent.com/35154079/196683022-209c2edb-db7a-4504-b21a-05b163694af7.gif)
