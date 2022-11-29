@@ -3,50 +3,87 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: odemirel <odemirel@student.42kocaeli.co    +#+  +:+       +#+        */
+/*   By: odemirel <odemirel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 10:35:06 by odemirel          #+#    #+#             */
-/*   Updated: 2022/11/01 15:55:51 by odemirel         ###   ########.fr       */
+/*   Updated: 2022/11/29 15:11:18 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <pthread.h>
+#include "philosophers.h"
 
-typedef struct s_philosophers
+void	*routine(void *param)
 {
-	int		p_id;
-	int		is_dead;
-	int		time_die;
-	int		time_eat;
-	int		time_sleep;
-	int		must_eat;
-}	t_philo;
+	t_philo	*psopher;
 
-void	*routine(t_philo psopher)
-{
+	psopher = (t_philo *) param;
 	return (0);
 }
 
-t_philo	*philo_init(char **av)
+t_data	*initialization(int ac, char **av)
 {
-	
+	static int	sint = 0;
+	t_data		*data;
+
+	data = malloc(sizeof(t_data));
+	if (ft_atoi(av[1]) <= 1)
+		data->has_died = 1;
+	sint++;
+	data->philo_num = ft_atoi(av[1]);
+	data->time_die = ft_atoi(av[2]);
+	data->time_eat = ft_atoi(av[3]);
+	data->time_sleep = ft_atoi(av[4]);
+	if (ac == 6)
+		data->must_eat = ft_atoi(av[5]);
+	else
+		data->must_eat = 0;
+	return (data);
+}
+
+t_philo	*init_philo(t_data data)
+{
+	static int	sint = 0;
+	t_philo		*data;
+
+	data = malloc(sizeof(t_philo));
+	if (ft_atoi(av[1]) <= 1)
+		data->has_died = 1;
+	sint++;
+	data->philo_num = ft_atoi(av[1]);
+	data->time_die = ft_atoi(av[2]);
+	data->time_eat = ft_atoi(av[3]);
+	data->time_sleep = ft_atoi(av[4]);
+	if (ac == 6)
+		data->must_eat = ft_atoi(av[5]);
+	else
+		data->must_eat = 0;
+	return (data);
 }
 
 int	main(int ac, char **av)
 {
-	pthread_t	t1;
-	t_philo		*philo1;
-	int			must_eat;
+	int			pnumber;
+	pthread_t	*threads;
+	t_data		*envvar;
+	t_philo		*philos;
+	time_t		t;
 
-	must_eat = 0;
-	if(ac == 5 || ac == 6)
+	pnumber = 0;
+	threads = malloc(sizeof(pthread_t) * pnumber);
+	if (ac == 5 || ac == 6)
 	{
-		philo1 = philo_init(av);
-		pthread_create(&t1, NULL, &routine, &philo1);
-		pthread_join(t1, NULL);
+		envvar = initialization(ac, av);
+		printf("Number: %d\nTime to die: %d\nTime to eat: %d\nTime to sleep: %d\nMinimum Meals: %d\n",
+			envvar->philo_num, envvar->time_die,
+			envvar->time_eat, envvar->time_sleep, envvar->must_eat);
+		philos = init_philo();
+		pthread_create(threads, NULL, &routine, philos);
+		pthread_join(*threads, NULL);
+	}
+	else
+	{
+		printf("Argüman sayısı yanlış.\n");
 		return (1);
 	}
+	return (0);
 }
