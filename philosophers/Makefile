@@ -6,13 +6,13 @@
 #    By: odemirel <odemirel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/24 12:30:07 by odemirel          #+#    #+#              #
-#    Updated: 2022/11/29 10:57:15 by odemirel         ###   ########.fr        #
+#    Updated: 2022/12/09 14:12:19 by odemirel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC		= gcc
 NAME	= philosophers
-CFLAGS	= -Wall -Wextra -Werror
+CFLAGS	= -Wall -Wextra -Werror -pthread -g
 SRCS	= $(wildcard *.c)
 
 OBJ		= $(SRCS:%.c=%.o)

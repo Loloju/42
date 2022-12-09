@@ -6,7 +6,7 @@
 /*   By: odemirel <odemirel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 10:12:52 by odemirel          #+#    #+#             */
-/*   Updated: 2022/11/29 12:01:00 by odemirel         ###   ########.fr       */
+/*   Updated: 2022/12/09 10:29:48 by odemirel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,12 @@
 # include <stdlib.h>
 # include <pthread.h>
 # include <sys/time.h>
+
+# define STR_SLEEP "is sleeping"
+# define STR_EAT "is eating"
+# define STR_THINK "is thinking"
+# define STR_FORK "has taken a fork."
+# define STR_DIE "died"
 
 typedef struct s_data
 {
@@ -35,14 +41,15 @@ typedef struct s_data
 
 typedef struct s_philo
 {
-	int		philo_id;
-	int		p_eat_count;
-	int		left_fork;
-	int		right_fork;
-	long	last_meal;
-	long	start_time;
+	int			philo_id;
+	int			p_eat_count;
+	int			left_fork;
+	int			right_fork;
+	long		last_meal;
+	long		start_time;
+	pthread_t	thread;
 
-	t_data	*philo_data;
+	t_data		*ph_data;
 }	t_philo;
 
 int	ft_atoi(const char *nptr);
